@@ -1,0 +1,67 @@
+
+:root {
+  /* Brand Colors */
+  --color-primary: #4A70A9;
+  --color-secondary: #8FABD4;
+  --color-background: #EFECE3;
+  --color-black: #000000;
+
+  /* Semantic Colors */
+  --bg: var(--color-background);
+  --surface: #FFFFFF;
+  --surface2: #E5E9EF;
+  --text: var(--color-black);
+  --text-muted: #4A70A9;
+  --border: #D5D9DC;
+  --accent: var(--color-primary);
+
+  /* Interactive Colors */
+  --btn-primary: var(--color-primary);
+  --btn-hover: #385C90;
+  --btn-text: #FFFFFF;
+
+  /* UI */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Semantic Colors */
+  --bg: #101827;
+  --surface: #192538;
+  --surface2: #24344B;
+  --text: #F5F7FC;
+  --text-muted: #AEC4E5;
+  --border: #34445D;
+  --accent: #8FABD4;
+
+  /* Interactive Colors */
+  --btn-primary: #8FABD4;
+  --btn-hover: #B7CCEB;
+  --btn-text: #101827;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
