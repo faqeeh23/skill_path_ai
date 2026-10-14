@@ -111,7 +111,6 @@ export default function Login() {
                     <p>Enter your credentials to continue.</p>
                     <GoogleLoginButton/>
                     <form onSubmit={handleSubmit} noValidate>
-                        <loginWithGoogle/>
                         <AuthField
                             label="Email address"
                             name="email"
@@ -142,9 +141,9 @@ export default function Login() {
                                 />
                                 <span>Remember me</span>
                             </label>
-                            <span className="auth-pending-link">
+                            <Link to="/forgot-password" className="auth-pending-link">
                                 Forgot password?
-                            </span>
+                            </Link>
                         </div>
 
                         <button type="submit" className="auth-submit">
