@@ -1,0 +1,137 @@
+/* Explore page. Relies on the shared tokens, .container, .eyebrow, .btn and .glass-card
+   (move those out of landing.css into a global stylesheet, see notes). */
+
+.explore-page { position: relative; overflow-x: clip; padding-bottom: clamp(64px, 9vw, 112px); }
+.explore-page .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Colour behind the glass */
+.explore-aurora { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.explore-aurora::before, .explore-aurora::after {
+  content: ""; position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.5;
+  animation: explore-drift 26s ease-in-out infinite alternate;
+}
+.explore-aurora::before { width: 520px; height: 520px; top: -120px; right: -100px; background: radial-gradient(circle, var(--color-secondary), transparent 70%); }
+.explore-aurora::after { width: 600px; height: 600px; bottom: -200px; left: -160px; background: radial-gradient(circle, var(--color-primary), transparent 70%); opacity: 0.35; animation-delay: -12s; }
+@keyframes explore-drift { to { transform: translate3d(-50px, 40px, 0) scale(1.08); } }
+
+/* Heading */
+.explore-heading {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px;
+  padding: clamp(56px, 8vw, 104px) 0 40px;
+}
+.explore-heading .eyebrow { margin-bottom: 4px; }
+.explore-heading h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); }
+.explore-heading p { max-width: 56ch; font-size: 1.1rem; opacity: 0.75; }
+
+/* Filters bar */
+.filters-bar {
+  display: grid; gap: 16px; padding: 16px; margin-bottom: 48px;
+  grid-template-columns: 1fr auto; align-items: center;
+  border-radius: var(--radius-xl);
+}
+.filter-search { position: relative; display: flex; align-items: center; }
+.filter-search .filter-search-icon,
+.filter-search svg { position: absolute; left: 16px; color: var(--text-muted); pointer-events: none; font-size: 1rem; }
+.filter-search input {
+  width: 100%; min-height: 48px; padding: 0 16px 0 46px;
+  font: inherit; color: var(--text);
+  background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius-md);
+  box-shadow: inset 0 1px 0 var(--glass-highlight);
+  outline: none; transition: box-shadow 0.35s var(--ease);
+}
+.filter-search input::placeholder { color: var(--text-muted); opacity: 0.8; }
+.filter-search input:focus-visible,
+.filter-select select:focus-visible { box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 28%, transparent); }
+
+.filter-selects { display: flex; gap: 12px; }
+.filter-select { display: grid; gap: 4px; font-size: 0.78rem; font-weight: 600; color: var(--text-muted); }
+.filter-select span { display: inline-flex; align-items: center; gap: 6px; }
+.filter-select select {
+  min-height: 44px; min-width: 150px; padding: 0 36px 0 14px;
+  font: inherit; font-size: 0.95rem; font-weight: 500; color: var(--text); cursor: pointer;
+  background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius-md);
+  box-shadow: inset 0 1px 0 var(--glass-highlight);
+  appearance: none; outline: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%234A70A9' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m1 1.5 5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center;
+}
+.filter-select select option { color: #000; }
+
+.filter-chips { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; }
+.filter-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  min-height: 38px; padding: 0 16px; font: inherit; font-size: 0.9rem; font-weight: 500; color: var(--text);
+  background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 999px; cursor: pointer;
+  box-shadow: inset 0 1px 0 var(--glass-highlight);
+  transition: transform 0.3s var(--ease), background 0.3s var(--ease), color 0.3s var(--ease);
+}
+.filter-chip .chip-icon { font-size: 0.88em; }
+.filter-chip:hover { transform: translateY(-2px); }
+.filter-chip:active { transform: scale(0.96); }
+.filter-chip.is-active { background: var(--btn-primary); color: var(--btn-text); border-color: transparent; }
+.filter-chip:focus-visible { outline: none; box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 35%, transparent); }
+
+/* Results */
+.explore-results-header { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+.explore-results-header h2 { display: inline-flex; align-items: center; gap: 10px; font-size: clamp(1.5rem, 3vw, 2rem); }
+.explore-results-header .results-header-icon { color: var(--accent); font-size: 0.9em; }
+.explore-results-header span { color: var(--text-muted); font-weight: 500; font-size: 0.95rem; }
+.explore-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+
+/* Path card */
+.path-card { display: flex; flex-direction: column; gap: 14px; padding: 28px; animation: explore-rise 0.7s var(--ease) both; animation-delay: calc(var(--i, 0) * 60ms); }
+@keyframes explore-rise { from { opacity: 0; transform: translateY(20px); } }
+.path-card-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.path-category {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: var(--accent); border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.path-category .category-icon { font-size: 0.85em; }
+.path-level { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
+.path-level .level-icon { font-size: 0.9em; }
+.path-card h3 { font-size: 1.3rem; }
+.path-description {
+  opacity: 0.74; font-size: 0.96rem;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.path-skills { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.path-skills li {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 10px; font-size: 0.8rem; border-radius: var(--radius-sm);
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+}
+.path-skills .skill-icon { font-size: 0.75em; opacity: 0.7; }
+.path-skills .more { color: var(--text-muted); }
+.path-card-footer {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  margin-top: auto; padding-top: 16px; border-top: 1px solid var(--glass-border);
+}
+.path-duration { display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+.path-link { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: var(--accent); text-decoration: none; }
+.path-link svg { transition: transform 0.35s var(--ease); }
+.path-card:hover .path-link svg { transform: translateX(4px); }
+.path-link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; } /* whole card is clickable */
+.path-link:focus-visible { outline: none; }
+.path-link:focus-visible::after { box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 35%, transparent); }
+
+/* Empty state */
+.explore-empty {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;
+  padding: clamp(40px, 7vw, 72px) 24px; border-radius: var(--radius-xl);
+}
+.explore-empty .empty-icon { font-size: 2.8rem; color: var(--text-muted); opacity: 0.7; margin-bottom: 4px; }
+.explore-empty p { opacity: 0.72; }
+.explore-empty .btn { margin-top: 8px; display: inline-flex; align-items: center; gap: 8px; }
+
+/* Responsive */
+@media (max-width: 800px) {
+  .filters-bar { grid-template-columns: 1fr; }
+  .filter-selects { display: grid; grid-template-columns: 1fr 1fr; }
+  .filter-select select { min-width: 0; width: 100%; }
+  .explore-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .explore-aurora::before, .explore-aurora::after, .path-card { animation: none; }
+  .filter-chip, .path-link svg { transition: none; }
+}

@@ -1,11 +1,20 @@
 
 import { Link } from "react-router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faGraduationCap,
+  faHouse,
+  faCompass,
+  faTags,
+  faRocket,
+} from "@fortawesome/free-solid-svg-icons";
 import "../../styles/Footer.css";
 
 const footerLinks = [
-  { label: "Home", path: "/" },
-  { label: "Learning Paths", path: "/paths" },
-  { label: "Get Started", path: "/register" }
+  { label: "Home", path: "/", icon: faHouse },
+  { label: "Learning Paths", path: "/paths", icon: faCompass },
+  { label: "Pricing", path: "/pricing", icon: faTags },
+  { label: "Get Started", path: "/register", icon: faRocket }
 ];
 
 export default function Footer() {
@@ -14,7 +23,8 @@ export default function Footer() {
       <div className="container footer-content">
         <div className="footer-info">
           <Link to="/" className="footer-brand">
-            SkillPath AI
+            <FontAwesomeIcon icon={faGraduationCap} className="footer-brand-icon" />
+            <span>SkillPath AI</span>
           </Link>
           <p>Personalized learning, powered by intelligence.</p>
         </div>
@@ -22,14 +32,16 @@ export default function Footer() {
         <nav className="footer-links" aria-label="Footer navigation">
           {footerLinks.map(link => (
             <Link key={link.path} to={link.path}>
-              {link.label}
+              <FontAwesomeIcon icon={link.icon} className="footer-link-icon" />
+              <span>{link.label}</span>
             </Link>
           ))}
         </nav>
       </div>
 
       <div className="container footer-bottom">
-        © {new Date().getFullYear()} SkillPath AI. All rights reserved.
+        <div>© {new Date().getFullYear()} SkillPath AI. All rights reserved.</div>
+        
       </div>
     </footer>
   );

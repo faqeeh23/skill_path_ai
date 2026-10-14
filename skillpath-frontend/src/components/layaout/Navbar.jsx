@@ -2,13 +2,25 @@
 import { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faXmark, faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faXmark,
+  faMoon,
+  faSun,
+  faHouse,
+  faCompass,
+  faTags,
+  faRightToBracket,
+  faRocket
+} from "@fortawesome/free-solid-svg-icons";
 import "../../styles/Navbar.css";
-import darkLogo from "../../assets/skillPathAI_logo_dark_mode.png"
-import lightLogo from "../../assets/skillPathAI_logo_light_mode.png"
+import darkLogo from "../../assets/skillPathAI_logo_dark_mode.png";
+import lightLogo from "../../assets/skillPathAI_logo_light_mode.png";
+
 const navItems = [
-  { label: "Home", path: "/" },
-  { label: "Explore Paths", path: "/paths" }
+  { label: "Home", path: "/", icon: faHouse },
+  { label: "Explore Paths", path: "/paths", icon: faCompass },
+  { label: "Pricing", path: "/pricing", icon: faTags }
 ];
 
 export default function Navbar() {
@@ -71,7 +83,8 @@ export default function Navbar() {
                   isActive ? "nav-link active" : "nav-link"
                 }
               >
-                {item.label}
+                <FontAwesomeIcon icon={item.icon} className="nav-item-icon" />
+                <span>{item.label}</span>
               </NavLink>
             ))}
           </div>
@@ -88,10 +101,12 @@ export default function Navbar() {
             </button>
 
             <Link className="btn btn-outline" to="/login" onClick={closeMenu}>
-              Log in
+              <FontAwesomeIcon icon={faRightToBracket} className="btn-icon" />
+              <span>Log in</span>
             </Link>
             <Link className="btn btn-primary" to="/register" onClick={closeMenu}>
-              Get Started
+              <FontAwesomeIcon icon={faRocket} className="btn-icon" />
+              <span>Get Started</span>
             </Link>
           </div>
         </div>
