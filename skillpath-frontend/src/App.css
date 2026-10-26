@@ -1,4 +1,4 @@
-
+﻿
 body {
   background: var(--bg);
   color: var(--text);
@@ -17,3 +17,5 @@ button {
 button:hover {
   background: var(--btn-hover);
 }
+
+

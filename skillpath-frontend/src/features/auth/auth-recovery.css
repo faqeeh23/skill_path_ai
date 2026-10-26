@@ -1,15 +1,15 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    Account Recovery Styles (ForgotPassword, ResetPassword, VerifyEmail)
    Matches the Glassmorphism & Aurora design language of SkillPath AI
    ========================================================================== */
 
 .recovery-page {
-  --g-bg: var(--glass-bg, rgba(255, 255, 255, 0.55));
-  --g-strong: var(--glass-bg-strong, rgba(255, 255, 255, 0.75));
-  --g-border: var(--glass-border, rgba(255, 255, 255, 0.7));
-  --g-hi: var(--glass-highlight, rgba(255, 255, 255, 0.8));
-  --g-shadow: var(--glass-shadow, 0 16px 40px rgba(74, 112, 169, 0.16));
-  --danger: #B3261E;
+  --g-bg: var(--glass-bg, var(--paint-mix-30));
+  --g-strong: var(--glass-bg-strong, var(--paint-mix-31));
+  --g-border: var(--glass-border, var(--paint-mix-32));
+  --g-hi: var(--glass-highlight, var(--paint-mix-33));
+  --g-shadow: var(--glass-shadow, 0 16px 40px var(--paint-mix-34));
+  --danger: var(--paint-b3261e);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
   position: relative;
@@ -23,9 +23,9 @@
   background: var(--bg);
 }
 
-:root[data-theme="dark"] .recovery-page {
-  --danger: #FF8A80;
-  --g-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+html[data-theme="dark"] .recovery-page {
+  --danger: var(--paint-ff8a80);
+  --g-shadow: 0 16px 40px var(--paint-mix-35);
 }
 
 /* Ambient floating aurora orbs */
@@ -52,7 +52,11 @@
   top: -12%;
   left: -8%;
   opacity: 0.45;
-  background: radial-gradient(circle, var(--color-secondary, #8FABD4), transparent 70%);
+  background: radial-gradient(
+    circle,
+    var(--color-secondary, var(--color-secondary)),
+    var(--paint-transparent) 70%
+  );
 }
 
 .recovery-ambient::after {
@@ -61,7 +65,11 @@
   bottom: -16%;
   right: -10%;
   opacity: 0.35;
-  background: radial-gradient(circle, var(--color-primary, #4A70A9), transparent 70%);
+  background: radial-gradient(
+    circle,
+    var(--color-primary, var(--color-primary)),
+    var(--paint-transparent) 70%
+  );
   animation-delay: -10s;
 }
 
@@ -81,7 +89,9 @@
   background: var(--g-strong);
   border: 1px solid var(--g-border);
   border-radius: 28px;
-  box-shadow: inset 0 1px 0 var(--g-hi), var(--g-shadow);
+  box-shadow:
+    inset 0 1px 0 var(--g-hi),
+    var(--g-shadow);
   display: flex;
   flex-direction: column;
   animation: recovery-rise 0.75s var(--ease) both;
@@ -102,11 +112,15 @@
   z-index: -1;
   border-radius: inherit;
   pointer-events: none;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), transparent 45%);
+  background: linear-gradient(
+    135deg,
+    var(--paint-mix-36),
+    var(--paint-transparent) 45%
+  );
   opacity: 0.65;
 }
 
-:root[data-theme="dark"] .recovery-card::before {
+html[data-theme="dark"] .recovery-card::before {
   opacity: 0.25;
 }
 
@@ -134,7 +148,9 @@
   font-weight: 600;
   color: var(--accent);
   text-decoration: none;
-  transition: transform 0.25s var(--ease), color 0.25s var(--ease);
+  transition:
+    transform 0.25s var(--ease),
+    color 0.25s var(--ease);
 }
 
 .recovery-back:hover {
@@ -152,16 +168,16 @@
 .recovery-icon {
   width: 56px;
   height: 56px;
-  border-radius: 16px;
-  background: color-mix(in srgb, var(--accent) 15%, transparent);
   color: var(--accent);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 1.55rem;
   margin-bottom: 18px;
-  box-shadow: inset 0 1px 0 var(--g-hi);
-  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  background: none;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
 }
 
 /* Eyebrow kicker */
@@ -249,7 +265,7 @@
 }
 
 .recovery-input input::placeholder {
-  color: color-mix(in srgb, var(--text) 45%, transparent);
+  color: color-mix(in srgb, var(--text) 45%, var(--paint-transparent));
 }
 
 .recovery-input input:hover {
@@ -259,7 +275,8 @@
 .recovery-input input:focus-visible {
   border-color: var(--accent);
   background: var(--g-strong);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 24%, transparent);
+  box-shadow: 0 0 0 4px
+    color-mix(in srgb, var(--accent) 24%, var(--paint-transparent));
 }
 
 .recovery-input input[aria-invalid="true"] {
@@ -267,7 +284,8 @@
 }
 
 .recovery-input input[aria-invalid="true"]:focus-visible {
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--danger) 22%, transparent);
+  box-shadow: 0 0 0 4px
+    color-mix(in srgb, var(--danger) 22%, var(--paint-transparent));
 }
 
 /* Errors */
@@ -296,11 +314,12 @@
   cursor: pointer;
   color: var(--btn-text);
   background: var(--btn-primary);
-  border: 1px solid transparent;
+  border: 1px solid var(--paint-transparent);
   border-radius: 14px;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.35),
-    0 8px 24px color-mix(in srgb, var(--btn-primary) 35%, transparent);
+    inset 0 1px 0 var(--paint-mix-36),
+    0 8px 24px
+      color-mix(in srgb, var(--btn-primary) 35%, var(--paint-transparent));
   transition:
     transform 0.25s var(--ease),
     background 0.25s var(--ease),
@@ -310,7 +329,8 @@
 .recovery-submit:hover:not(:disabled) {
   background: var(--btn-hover);
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px color-mix(in srgb, var(--btn-primary) 45%, transparent);
+  box-shadow: 0 12px 28px
+    color-mix(in srgb, var(--btn-primary) 45%, var(--paint-transparent));
 }
 
 .recovery-submit:active:not(:disabled) {
@@ -325,7 +345,8 @@
 
 .recovery-submit:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 35%, transparent);
+  box-shadow: 0 0 0 4px
+    color-mix(in srgb, var(--accent) 35%, var(--paint-transparent));
 }
 
 .recovery-link-btn {
@@ -337,8 +358,9 @@
   margin-top: 20px;
   padding: 14px 18px;
   border-radius: 14px;
-  background: color-mix(in srgb, var(--accent) 12%, transparent);
-  border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--paint-transparent));
+  border: 1px solid
+    color-mix(in srgb, var(--accent) 24%, var(--paint-transparent));
   color: var(--text);
   font-size: 0.9rem;
   line-height: 1.5;
@@ -386,8 +408,9 @@
   padding: 16px 18px;
   margin-bottom: 24px;
   border-radius: 16px;
-  background: color-mix(in srgb, var(--accent) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--paint-transparent));
+  border: 1px solid
+    color-mix(in srgb, var(--accent) 20%, var(--paint-transparent));
 }
 
 .verification-info svg {
@@ -428,32 +451,38 @@
 }
 
 /* Dark Mode Overrides */
-:root[data-theme="dark"] .recovery-card {
+html[data-theme="dark"] .recovery-card {
   background: var(--g-strong);
-  border-color: rgba(143, 171, 212, 0.18);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 20px 50px rgba(0, 0, 0, 0.45);
+  border-color: var(--paint-mix-37);
+  box-shadow:
+    inset 0 1px 0 var(--paint-mix-38),
+    0 20px 50px var(--paint-mix-35);
 }
 
 @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
-  :root[data-theme="dark"] .recovery-card {
+  html[data-theme="dark"] .recovery-card {
     background: var(--g-bg);
   }
 }
 
-:root[data-theme="dark"] .recovery-input input {
-  background: color-mix(in srgb, var(--surface2, #24344B) 70%, transparent);
+html[data-theme="dark"] .recovery-input input {
+  background: color-mix(
+    in srgb,
+    var(--surface2, var(--paint-24344b)) 70%,
+    var(--paint-transparent)
+  );
   border-color: var(--border);
 }
 
-:root[data-theme="dark"] .recovery-input input:focus-visible {
-  background: var(--surface2, #24344B);
+html[data-theme="dark"] .recovery-input input:focus-visible {
+  background: var(--surface2, var(--paint-24344b));
 }
 
-:root[data-theme="dark"] .recovery-ambient::before {
+html[data-theme="dark"] .recovery-ambient::before {
   opacity: 0.28;
 }
 
-:root[data-theme="dark"] .recovery-ambient::after {
+html[data-theme="dark"] .recovery-ambient::after {
   opacity: 0.22;
 }
 

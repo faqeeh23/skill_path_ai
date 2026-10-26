@@ -1,0 +1,5 @@
+Sample playback media: flower.mp4 from MDN interactive examples
+Source: https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4
+The source identifies this asset as a CC0 video.
+Used only as silent sample footage for the frontend playback/resume demonstration.
+The instructional notes in SkillPath are separate from this generic footage.

@@ -1,0 +1,46 @@
+/* Shared SweetAlert dialogs: no component-owned color literals. */
+.swal2-popup.sp-alert {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  font-family: inherit;
+}
+.sp-alert .swal2-title {
+  color: var(--text);
+  font-size: 23px;
+}
+.sp-alert .swal2-html-container {
+  color: var(--text-muted);
+  white-space: pre-line;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.sp-alert .swal2-confirm,
+.sp-alert .swal2-cancel {
+  min-height: 44px;
+  border-radius: 6px;
+  font: inherit;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.sp-alert .swal2-confirm {
+  background: var(--nav-brand);
+  color: var(--nav-white);
+  border: 1px solid var(--nav-brand);
+}
+.sp-alert .swal2-cancel {
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  margin-inline: 10px;
+}
+.sp-alert button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .swal2-popup.sp-alert {
+    animation: none;
+  }
+}

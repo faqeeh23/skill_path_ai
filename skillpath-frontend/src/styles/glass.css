@@ -1,58 +1,4 @@
-
-:root {
-  --color-primary: #4A70A9;
-  --color-secondary: #8FABD4;
-  --color-background: #EFECE3;
-
-  --bg: #EFECE3;
-  --surface: #FFFFFF;
-  --text: #182A42;
-  --text-muted: #526B8E;
-  --border: #D5D9DC;
-  --accent: #4A70A9;
-
-  --btn-primary: #4A70A9;
-  --btn-hover: #385C90;
-  --btn-text: #FFFFFF;
-
-  --glass-bg: rgba(255,255,255,0.48);
-  --glass-border: rgba(255,255,255,0.8);
-  --glass-highlight: rgba(255,255,255,0.95);
-  --glass-shadow: 0 12px 35px rgba(40,70,110,0.12);
-  --glass-active: rgba(74,112,169,0.14);
-  --glass-blur: 22px;
-  --liquid-fill: #4A70A9;
-  --liquid-text: #FFFFFF;
-
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-  color-scheme: light;
-}
-
-:root[data-theme="dark"] {
-  --bg: #101827;
-  --surface: #192538;
-  --text: #F5F7FC;
-  --text-muted: #AEC4E5;
-  --border: #34445D;
-  --accent: #8FABD4;
-
-  --btn-primary: #8FABD4;
-  --btn-hover: #B7CCEB;
-  --btn-text: #101827;
-
-  --glass-bg: rgba(25,37,56,0.58);
-  --glass-border: rgba(190,210,245,0.2);
-  --glass-highlight: rgba(255,255,255,0.17);
-  --glass-shadow: 0 12px 35px rgba(0,0,0,0.3);
-  --glass-active: rgba(143,171,212,0.17);
-  --liquid-fill: #8FABD4;
-  --liquid-text: #101827;
-  color-scheme: dark;
-}
-
-/* Global Base */
+﻿/* Global Base */
 * {
   box-sizing: border-box;
 }
@@ -65,14 +11,25 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at 10% 12%, rgba(143,171,212,.27), transparent 38%),
-    radial-gradient(circle at 85% 35%, rgba(74,112,169,.15), transparent 42%),
+    radial-gradient(
+      circle at 10% 12%,
+      var(--paint-mix-82),
+      var(--paint-transparent) 38%
+    ),
+    radial-gradient(
+      circle at 85% 35%,
+      var(--paint-mix-59),
+      var(--paint-transparent) 42%
+    ),
     var(--bg);
   color: var(--text);
   font-family: Inter, system-ui, sans-serif;
 }
 
-button, input, textarea, select {
+button,
+input,
+textarea,
+select {
   font: inherit;
 }
 
@@ -104,13 +61,13 @@ button, input, textarea, select {
   right: 18px;
   border-radius: 50%;
   background: var(--liquid-fill);
-  transform: translate(50%,-50%) scale(0);
-  transition: transform .65s cubic-bezier(.22,1,.36,1);
+  transform: translate(50%, -50%) scale(0);
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
 }
 
 .liquid:hover::before {
-  transform: translate(50%,-50%) scale(18);
+  transform: translate(50%, -50%) scale(18);
 }
 
 .liquid:hover {
@@ -121,12 +78,14 @@ button, input, textarea, select {
 .glass-card {
   border-radius: 24px;
   padding: 28px;
-  transition: transform .3s, box-shadow .3s;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
 }
 
 .glass-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 18px 45px rgba(40,70,110,.16);
+  box-shadow: 0 18px 45px var(--paint-mix-83);
 }
 
 /* Reusable Glass Inputs */

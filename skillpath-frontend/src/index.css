@@ -1,24 +1,23 @@
-
-:root {
+﻿:root {
   /* Brand Colors */
-  --color-primary: #4A70A9;
-  --color-secondary: #8FABD4;
-  --color-background: #EFECE3;
+  --color-primary: #4a70a9;
+  --color-secondary: #8fabd4;
+  --color-background: #f7f6f1;
   --color-black: #000000;
 
   /* Semantic Colors */
-  --bg: var(--color-background);
-  --surface: #FFFFFF;
-  --surface2: #E5E9EF;
-  --text: var(--color-black);
-  --text-muted: #4A70A9;
-  --border: #D5D9DC;
-  --accent: var(--color-primary);
+  --bg: #f5f7fb;
+  --surface: #ffffff;
+  --surface2: #eaf0f9;
+  --text: #17283f;
+  --text-muted: #56657b;
+  --border: #dce4ef;
+  --accent: #3c61a0;
 
   /* Interactive Colors */
-  --btn-primary: var(--color-primary);
-  --btn-hover: #385C90;
-  --btn-text: #FFFFFF;
+  --btn-primary: #3c61a0;
+  --btn-hover: #2b4c83;
+  --btn-text: #ffffff;
 
   /* UI */
   --radius-sm: 8px;
@@ -26,24 +25,661 @@
   --radius-lg: 20px;
 
   color-scheme: light;
+
+  --hero-bg: #17395c;
+
+  --hero-text: #ffffff;
+
+  --hero-muted: #cadbef;
+
+  --hero-tag-bg: #244c72;
+
+  --hero-action-bg: #ffffff;
+
+  --hero-action-text: #17395c;
+
+  --hero-progress: #60d5bc;
+
+  --tone-blue: #3868b7;
+
+  --tone-indigo: #6851c7;
+
+  --tone-teal: #0c807a;
+
+  --tone-violet: #8550bc;
+
+  --tone-amber: #9a650b;
+
+  --tone-rose: #b54164;
+
+  --tone-orange: #b75f27;
+
+  --tone-cyan: #157c99;
+
+  --tone-slate: #62748d;
+
+  --tone-blue-bg: #eaf1ff;
+
+  --tone-teal-bg: #e4f6ef;
+
+  --tone-violet-bg: #f0eafa;
+
+  --tone-amber-bg: #fff4d8;
+
+  --tone-rose-bg: #fceaf0;
+
+  --tone-orange-bg: #fff0e3;
+
+  --success: #167351;
+
+  --success-bg: #e4f6ed;
+
+  --danger: #b52d48;
+
+  --danger-bg: #fff0f2;
+
+  --overlay: #101827b3;
+
+  --media-bg: #000000;
+
+  --tech-react: #087ea4;
+
+  --tech-react-bg: #15394c;
+
+  --tech-laravel: #ff2d20;
+
+  --tech-laravel-bg: #fff0ec;
+
+  --tech-angular: #dd0031;
+
+  --tech-angular-bg: #ffebf0;
+
+  --tech-node: #339933;
+
+  --tech-node-bg: #ebf6e8;
+
+  --tech-python: #3776ab;
+
+  --tech-python-bg: #fff5d7;
+
+  --tech-javascript: #947300;
+
+  --tech-javascript-bg: #25291d;
+
+  --tech-html: #e34f26;
+
+  --tech-html-bg: #fff0e7;
+
+  --tech-css: #1572b6;
+
+  --tech-css-bg: #e7f3fe;
+
+  --tech-php: #777bb4;
+
+  --tech-php-bg: #f0effb;
+
+  --tech-figma: #a259ff;
+
+  --tech-figma-bg: #f3ebff;
+
+  --tech-linux: #273448;
+
+  --tech-linux-bg: #fff2ce;
+
+  --tech-sql: #138b85;
+
+  --tech-sql-bg: #e4f5f0;
+
+  --tech-code: #526ca4;
+
+  --tech-code-bg: #edf1f9;
+
+  --color-primary-hover: var(--btn-hover);
+
+  --color-primary-subtle: var(--paint-mix-1);
+
+  --color-bg: var(--color-background);
+
+  --color-surface: var(--paint-mix-2);
+
+  --color-surface-strong: var(--paint-mix-3);
+
+  --color-surface-raised: var(--paint-mix-4);
+
+  --color-border: var(--paint-mix-5);
+
+  --color-border-strong: var(--paint-mix-6);
+
+  --color-text: var(--paint-182a42);
+
+  --color-text-muted: var(--paint-4e6680);
+
+  --color-text-inverse: var(--surface);
+
+  --color-success: var(--paint-1a6b3a);
+
+  --color-success-subtle: var(--paint-mix-7);
+
+  --color-success-border: var(--paint-mix-8);
+
+  --color-warning: var(--paint-8a4d0a);
+
+  --color-warning-subtle: var(--paint-mix-9);
+
+  --color-warning-border: var(--paint-mix-10);
+
+  --color-xp: var(--paint-c87c10);
+
+  --color-badge: var(--paint-5a3fa8);
+
+  --glass-blur: 26px;
+
+  --glass-saturate: 175%;
+
+  --glass-hi: var(--paint-mix-11);
+
+  --glass-shadow: 0 18px 52px var(--paint-mix-12);
+
+  --space-1: 4px;
+
+  --space-2: 8px;
+
+  --space-3: 12px;
+
+  --space-4: 16px;
+
+  --space-5: 20px;
+
+  --space-6: 24px;
+
+  --space-7: 28px;
+
+  --space-8: 32px;
+
+  --space-10: 40px;
+
+  --space-12: 48px;
+
+  --radius-xl: 28px;
+
+  --radius-full: 9999px;
+
+  --line-height-body: 1.65;
+
+  --line-height-arab: 1.75;
+
+  --icon-size-sm: 16px;
+
+  --icon-size-md: 20px;
+
+  --icon-size-lg: 28px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+  --dur-fast: 110ms;
+
+  --dur-normal: 240ms;
+
+  --dur-slow: 550ms;
+
+  --dur-slide: 150ms;
+
+  --blob-play: running;
+
+  --blob-opacity: 0.36;
+
+  --dir: 1;
+
+  --sp-space: 24px;
+
+  --glass-bg: var(--paint-mix-77);
+
+  --glass-border: var(--paint-mix-33);
+
+  --glass-highlight: var(--paint-mix-46);
+
+  --glass-active: var(--paint-mix-45);
+
+  --liquid-fill: var(--color-primary);
+
+  --liquid-text: var(--surface);
+
+  /* Compatibility paint tokens for preserved legacy styles. All raw colors live here. */
+
+  --paint-mix-1: rgba(74, 112, 169, 0.11);
+
+  --paint-mix-2: rgba(255, 255, 255, 0.58);
+
+  --paint-mix-3: rgba(255, 255, 255, 0.76);
+
+  --paint-mix-4: rgba(255, 255, 255, 0.96);
+
+  --paint-mix-5: rgba(255, 255, 255, 0.8);
+
+  --paint-mix-6: rgba(74, 112, 169, 0.28);
+
+  --paint-182a42: #182a42;
+
+  --paint-4e6680: #4e6680;
+
+  --paint-1a6b3a: #1a6b3a;
+
+  --paint-mix-7: rgba(26, 107, 58, 0.1);
+
+  --paint-mix-8: rgba(26, 107, 58, 0.28);
+
+  --paint-8a4d0a: #8a4d0a;
+
+  --paint-mix-9: rgba(138, 77, 10, 0.09);
+
+  --paint-mix-10: rgba(138, 77, 10, 0.24);
+
+  --paint-c87c10: #c87c10;
+
+  --paint-5a3fa8: #5a3fa8;
+
+  --paint-mix-11: rgba(255, 255, 255, 0.92);
+
+  --paint-mix-12: rgba(40, 70, 110, 0.13);
+
+  --paint-101827: #101827;
+
+  --paint-mix-13: rgba(25, 37, 56, 0.62);
+
+  --paint-mix-14: rgba(25, 37, 56, 0.82);
+
+  --paint-mix-15: rgba(32, 48, 72, 0.97);
+
+  --paint-mix-16: rgba(190, 210, 245, 0.16);
+
+  --paint-mix-17: rgba(143, 171, 212, 0.34);
+
+  --paint-eef3fc: #eef3fc;
+
+  --paint-8baad4: #8baad4;
+
+  --paint-b7cceb: #b7cceb;
+
+  --paint-mix-18: rgba(143, 171, 212, 0.14);
+
+  --paint-5cc98a: #5cc98a;
+
+  --paint-mix-19: rgba(92, 201, 138, 0.12);
+
+  --paint-mix-20: rgba(92, 201, 138, 0.3);
+
+  --paint-f0a848: #f0a848;
+
+  --paint-mix-21: rgba(240, 168, 72, 0.12);
+
+  --paint-mix-22: rgba(240, 168, 72, 0.3);
+
+  --paint-mix-23: rgba(255, 255, 255, 0.09);
+
+  --paint-mix-24: rgba(0, 0, 0, 0.38);
+
+  --paint-transparent: transparent;
+
+  --paint-mix-25: rgba(255, 255, 255, 0.28);
+
+  --paint-mix-26: rgba(40, 70, 110, 0.07);
+
+  --paint-fff: #fff;
+
+  --paint-mix-27: rgba(0, 0, 0, 0.12);
+
+  --paint-mix-28: rgba(16, 24, 39, 0.55);
+
+  --paint-mix-29: rgba(0, 0, 0, 0.22);
+
+  --paint-mix-30: rgba(255, 255, 255, 0.55);
+
+  --paint-mix-31: rgba(255, 255, 255, 0.75);
+
+  --paint-mix-32: rgba(255, 255, 255, 0.7);
+
+  --paint-mix-33: rgba(255, 255, 255, 0.8);
+
+  --paint-mix-34: rgba(74, 112, 169, 0.16);
+
+  --paint-b3261e: #b3261e;
+
+  --paint-ff8a80: #ff8a80;
+
+  --paint-mix-35: rgba(0, 0, 0, 0.45);
+
+  --paint-mix-36: rgba(255, 255, 255, 0.35);
+
+  --paint-mix-37: rgba(143, 171, 212, 0.18);
+
+  --paint-mix-38: rgba(255, 255, 255, 0.14);
+
+  --paint-24344b: #24344b;
+
+  --paint-mix-39: rgba(74, 112, 169, 0.18);
+
+  --paint-mix-40: rgba(255, 255, 255, 0.65);
+
+  --paint-mix-41: rgba(255, 255, 255, 0.85);
+
+  --paint-mix-42: rgba(74, 112, 169, 0.08);
+
+  --paint-4285f4: #4285f4;
+
+  --paint-mix-43: rgba(255, 255, 255, 0.9);
+
+  --paint-mix-44: rgba(143, 171, 212, 0.65);
+
+  --paint-mix-45: rgba(74, 112, 169, 0.14);
+
+  --paint-mix-46: rgba(255, 255, 255, 0.95);
+
+  --paint-525d6b: #525d6b;
+
+  --paint-mix-47: rgba(74, 112, 169, 0.2);
+
+  --paint-b52d3b: #b52d3b;
+
+  --paint-ffadb6: #ffadb6;
+
+  --paint-101827b3: #101827b3;
+
+  --paint-000: #000;
+
+  --paint-mix-48: rgba(255, 255, 255, 0.52);
+
+  --paint-mix-49: rgba(255, 255, 255, 0.72);
+
+  --paint-mix-50: rgba(255, 255, 255, 0.78);
+
+  --paint-mix-51: rgba(25, 37, 56, 0.6);
+
+  --paint-mix-52: rgba(25, 37, 56, 0.8);
+
+  --paint-mix-53: rgba(190, 210, 245, 0.18);
+
+  --paint-mix-54: rgba(255, 255, 255, 0.12);
+
+  --paint-mix-55: rgba(0, 0, 0, 0.32);
+
+  --paint-mix-56: rgba(255, 255, 255, 0.32);
+
+  --paint-mix-57: rgba(40, 70, 110, 0.14);
+
+  --paint-mix-58: rgba(143, 171, 212, 0.4);
+
+  --paint-mix-59: rgba(74, 112, 169, 0.15);
+
+  --paint-mix-60: rgba(255, 255, 255, 0.6);
+
+  --paint-mix-61: rgba(255, 255, 255, 0.25);
+
+  --paint-mix-62: rgba(255, 255, 255, 0.61);
+
+  --paint-mix-63: rgba(255, 255, 255, 0.9);
+
+  --paint-mix-64: rgba(45, 75, 115, 0.1);
+
+  --paint-mix-65: rgba(255, 255, 255, 0.7);
+
+  --paint-mix-66: rgba(74, 112, 169, 0.3);
+
+  --paint-mix-67: rgba(255, 255, 255, 0.72);
+
+  --paint-mix-68: rgba(40, 70, 110, 0.09);
+
+  --paint-586779: #586779;
+
+  --paint-mix-69: rgba(25, 37, 56, 0.7);
+
+  --paint-mix-70: rgba(143, 171, 212, 0.18);
+
+  --paint-mix-71: rgba(25, 37, 56, 0.82);
+
+  --paint-mix-72: rgba(2, 6, 18, 0.38);
+
+  --paint-mix-73: rgba(143, 171, 212, 0.65);
+
+  --paint-mix-74: rgba(36, 52, 75, 0.9);
+
+  --paint-mix-75: rgba(143, 171, 212, 0.22);
+
+  --paint-mix-76: rgba(74, 112, 169, 0.12);
+
+  --paint-f3f6fb: #f3f6fb;
+
+  --paint-e8eff9: #e8eff9;
+
+  --paint-203552: #203552;
+
+  --paint-526680: #526680;
+
+  --paint-365e95: #365e95;
+
+  --paint-dce4ef: #dce4ef;
+
+  --paint-226e61: #226e61;
+
+  --paint-e8f3ee: #e8f3ee;
+
+  --paint-101b2c: #101b2c;
+
+  --paint-19283d: #19283d;
+
+  --paint-243a56: #243a56;
+
+  --paint-edf3fc: #edf3fc;
+
+  --paint-b0c2db: #b0c2db;
+
+  --paint-adcaf3: #adcaf3;
+
+  --paint-354961: #354961;
+
+  --paint-93d3bd: #93d3bd;
+
+  --paint-203e39: #203e39;
+
+  --paint-284b7c: #284b7c;
+
+  --paint-101b2cb3: #101b2cb3;
+
+  --paint-b22b35: #b22b35;
+
+  --paint-ffb7bc: #ffb7bc;
+
+  --paint-62738a: #62738a;
+
+  --paint-e3e9f1: #e3e9f1;
+
+  --paint-237c70: #237c70;
+
+  --paint-white: white;
+
+  --paint-d5dfea: #d5dfea;
+
+  --paint-dce5f2: #dce5f2;
+
+  --paint-3f608c: #3f608c;
+
+  --paint-576e8c: #576e8c;
+
+  --paint-526c90: #526c90;
+
+  --paint-c3d1e4: #c3d1e4;
+
+  --paint-244a7e: #244a7e;
+
+  --paint-c8d7eb: #c8d7eb;
+
+  --paint-cedaed: #cedaed;
+
+  --paint-365e9570: #365e9570;
+
+  --paint-edf0f5: #edf0f5;
+
+  --paint-c8d5e6: #c8d5e6;
+
+  --paint-71849f: #71849f;
+
+  --paint-3c5476: #3c5476;
+
+  --paint-7c8da4: #7c8da4;
+
+  --paint-7859a6: #7859a6;
+
+  --paint-f8fafc: #f8fafc;
+
+  --paint-d9e2f0: #d9e2f0;
+
+  --paint-365e9510: #365e9510;
+
+  --paint-49688f: #49688f;
+
+  --paint-a96c2c: #a96c2c;
+
+  --paint-f5ecde: #f5ecde;
+
+  --paint-dfe7f2: #dfe7f2;
+
+  --paint-bfdcd5: #bfdcd5;
+
+  --paint-e0e6ee: #e0e6ee;
+
+  --paint-eef2f9: #eef2f9;
+
+  --paint-f1f4f9: #f1f4f9;
+
+  --paint-a8bcdc: #a8bcdc;
+
+  --paint-e7efed: #e7efed;
+
+  --paint-d7e5e0: #d7e5e0;
+
+  --paint-526f68: #526f68;
+
+  --paint-20695e: #20695e;
+
+  --paint-d9e3f1: #d9e3f1;
+
+  --paint-142b5640: #142b5640;
+
+  --paint-142b5670: #142b5670;
+
+  --paint-edf2f8: #edf2f8;
+
+  --paint-mix-77: rgba(255, 255, 255, 0.48);
+
+  --paint-mix-78: rgba(25, 37, 56, 0.58);
+
+  --paint-mix-79: rgba(190, 210, 245, 0.2);
+
+  --paint-mix-80: rgba(255, 255, 255, 0.17);
+
+  --paint-mix-81: rgba(143, 171, 212, 0.17);
+
+  --paint-mix-82: rgba(143, 171, 212, 0.27);
+
+  --paint-mix-83: rgba(40, 70, 110, 0.16);
+
+  --paint-277747: #277747;
+
+  --paint-b44747: #b44747;
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
 
   /* Semantic Colors */
-  --bg: #101827;
-  --surface: #192538;
-  --surface2: #24344B;
-  --text: #F5F7FC;
-  --text-muted: #AEC4E5;
-  --border: #34445D;
-  --accent: #8FABD4;
+  --bg: #101a2a;
+  --surface: #19283c;
+  --surface2: #253a54;
+  --text: #eef4fd;
+  --text-muted: #b3c2d9;
+  --border: #354962;
+  --accent: #a8c9ff;
 
   /* Interactive Colors */
-  --btn-primary: #8FABD4;
-  --btn-hover: #B7CCEB;
-  --btn-text: #101827;
+  --btn-primary: #a8c9ff;
+  --btn-hover: #c4dcff;
+  --btn-text: #102239;
+  --hero-bg: #193f64;
+  --hero-text: #ffffff;
+  --hero-muted: #d3e2f3;
+  --hero-tag-bg: #285779;
+  --hero-action-bg: #e9f2ff;
+  --hero-action-text: #17395c;
+  --hero-progress: #69dec2;
+  --tone-blue: #9fbeff;
+  --tone-indigo: #baabff;
+  --tone-teal: #70d9c0;
+  --tone-violet: #ceabfb;
+  --tone-amber: #f1c56d;
+  --tone-rose: #f4a2be;
+  --tone-orange: #f6b27e;
+  --tone-cyan: #7cd2ed;
+  --tone-slate: #bbcbe0;
+  --tone-blue-bg: #243b60;
+  --tone-teal-bg: #1e423e;
+  --tone-violet-bg: #372c50;
+  --tone-amber-bg: #463c27;
+  --tone-rose-bg: #482d3f;
+  --tone-orange-bg: #493626;
+  --success: #85dfba;
+  --success-bg: #1b4036;
+  --danger: #ffadc1;
+  --danger-bg: #452a38;
+  --tech-laravel-bg: #472a2b;
+  --tech-angular-bg: #44263b;
+  --tech-node-bg: #233f2a;
+  --tech-node: #70c761;
+  --tech-python-bg: #393b2d;
+  --tech-python: #78b4e1;
+  --tech-html-bg: #442f29;
+  --tech-html: #ff875d;
+  --tech-css-bg: #233c56;
+  --tech-css: #6bb8f0;
+  --tech-php-bg: #333550;
+  --tech-php: #b4b7ed;
+  --tech-figma-bg: #3a2d54;
+  --tech-figma: #c39aff;
+  --tech-linux-bg: #423b28;
+  --tech-linux: #f5df9f;
+  --tech-sql-bg: #1d403e;
+  --tech-sql: #69d3c5;
+  --tech-code-bg: #283951;
+  --tech-code: #a2bee8;
+  --color-bg: var(--paint-101827);
+  --color-surface: var(--paint-mix-13);
+  --color-surface-strong: var(--paint-mix-14);
+  --color-surface-raised: var(--paint-mix-15);
+  --color-border: var(--paint-mix-16);
+  --color-border-strong: var(--paint-mix-17);
+  --color-text: var(--paint-eef3fc);
+  --color-text-muted: var(--paint-8baad4);
+  --color-text-inverse: var(--paint-101827);
+  --color-primary: var(--color-secondary);
+  --color-primary-hover: var(--paint-b7cceb);
+  --color-primary-subtle: var(--paint-mix-18);
+  --color-secondary: var(--color-primary);
+  --color-success: var(--paint-5cc98a);
+  --color-success-subtle: var(--paint-mix-19);
+  --color-success-border: var(--paint-mix-20);
+  --color-warning: var(--paint-f0a848);
+  --color-warning-subtle: var(--paint-mix-21);
+  --color-warning-border: var(--paint-mix-22);
+  --glass-hi: var(--paint-mix-23);
+  --glass-shadow: 0 18px 52px var(--paint-mix-24);
+  --glass-bg: var(--paint-mix-78);
+  --glass-border: var(--paint-mix-79);
+  --glass-highlight: var(--paint-mix-80);
+  --glass-active: var(--paint-mix-81);
+  --liquid-fill: var(--color-secondary);
+  --liquid-text: var(--paint-101827);
+  --tech-react: #61dafb;
+  --tech-javascript: #f7df1e;
 }
 
 *,
@@ -63,5 +699,35 @@ body,
 body {
   background-color: var(--bg);
   color: var(--text);
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+/* Solid public header palette, deliberately consistent across both page themes. */
+:root {
+  --nav-bg: #101e33;
+  --nav-ink: #f2f6fd;
+  --nav-line: #2b3b51;
+  --nav-hover: #23364f;
+  --nav-highlight: #a8c9ff;
+  --nav-brand: #4a70a9;
+  --nav-brand-hover: #3b5d91;
+  --nav-white: #ffffff;
+  --nav-panel-text: #17283f;
+  --nav-panel-muted: #56657b;
+  --nav-panel-line: #dce4ef;
+  --nav-panel-hover: #f3f6fb;
+  --nav-icon-bg: #eaf0fa;
+  --nav-shadow: #101e3326;
+  --nav-overlay: #101e33b3;
+}
+
+/* Shared public-page accents on the solid navy brand surface. */
+:root {
+  --public-soft: #c1cfe2;
+  --public-react: #61dafb;
+  --public-laravel: #ff7567;
+  --public-python: #8dc5ed;
+  --public-figma: #c9a5ff;
 }

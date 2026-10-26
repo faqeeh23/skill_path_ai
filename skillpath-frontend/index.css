@@ -1,0 +1,131 @@
+﻿/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   Root â€“ Light mode
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+:root {
+  /* Brand Colors */
+  --color-primary: #4A70A9;
+  --color-secondary: #8FABD4;
+  --color-background: #EFECE3;
+  --color-black: #000000;
+
+  /* Semantic Colors */
+  --bg: var(--color-background);
+  --surface: #FFFFFF;
+  --surface2: #E5E9EF;
+  --text: var(--color-black);
+  --text-muted: #4A70A9;
+  --border: #D5D9DC;
+  --accent: var(--color-primary);
+
+  /* Interactive Colors */
+  --btn-primary: var(--color-primary);
+  --btn-hover: #385C90;
+  --btn-text: #FFFFFF;
+
+  /* â”€â”€â”€â”€â”€ New â€œpopâ€ accent (warm copper / amber) â”€â”€â”€â”€â”€ */
+  --color-accent-pop: #D97706;          /* base pop color â€“ amber */
+  --color-accent-pop-hover: #B45309;    /* slightly darker on hover */
+  --color-accent-pop-active: #92400E;   /* pressed state */
+  --color-accent-pop-contrast: #FFFFFF;/* text/icon contrast on pop background */
+
+  /* UI */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  color-scheme: light;
+}
+
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   Root â€“ Dark mode
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Semantic Colors */
+  --bg: #101827;
+  --surface: #192538;
+  --surface2: #24344B;
+  --text: #F5F7FC;
+  --text-muted: #AEC4E5;
+  --border: #34445D;
+  --accent: #8FABD4;
+
+  /* Interactive Colors */
+  --btn-primary: #8FABD4;
+  --btn-hover: #B7CCEB;
+  --btn-text: #101827;
+
+  /* â”€â”€â”€â”€â”€ New â€œpopâ€ accent â€“ adjusted for dark background â”€â”€â”€â”€â”€ */
+  --color-accent-pop: #F59E0B;          /* brighter amber for contrast */
+  --color-accent-pop-hover: #D97706;    /* a notch darker on hover */
+  --color-accent-pop-active: #B45309;   /* pressed state */
+  --color-accent-pop-contrast: #101827;/* text/icon contrast on pop bg */
+}
+
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   Global resets & utilities
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+}
+
+/* Body styling â€“ uses the generic semantic variables */
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   Example helper classes (you can copyâ€‘paste these into your UI lib)
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+/* Primary button (unchanged) */
+.btn-primary {
+  background: var(--btn-primary);
+  color: var(--btn-text);
+  border-radius: var(--radius-sm);
+}
+.btn-primary:hover { background: var(--btn-hover); }
+
+/* â”€â”€â”€â”€â”€ New â€œpopâ€ button (use for special CTAs) â”€â”€â”€â”€â”€ */
+.btn-pop {
+  background: var(--color-accent-pop);
+  color: var(--color-accent-pop-contrast);
+  border-radius: var(--radius-sm);
+  transition: background 0.2s ease;
+}
+.btn-pop:hover   { background: var(--color-accent-pop-hover); }
+.btn-pop:active  { background: var(--color-accent-pop-active); }
+
+/* Badges / tags */
+.badge-pop {
+  background: var(--color-accent-pop);
+  color: var(--color-accent-pop-contrast);
+  border-radius: var(--radius-sm);
+  padding: 0.2rem 0.5rem;
+}
+
+/* Notification dot / alert indicator */
+.dot-pop {
+  width: 8px;
+  height: 8px;
+  background: var(--color-accent-pop);
+  border-radius: 50%;
+}
+
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   End of file
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+

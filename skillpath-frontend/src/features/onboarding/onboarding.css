@@ -1,0 +1,617 @@
+﻿/* ============================================================
+   Onboarding Ã¢â‚¬â€ full page & component styles
+   Matches the project's glass / liquid design language.
+   ============================================================ */
+
+/* Ã¢â€â‚¬Ã¢â€â‚¬ Local tokens Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+.onboarding-page {
+  --g-bg: var(--glass-bg, var(--paint-mix-48));
+  --g-strong: var(--glass-bg-strong, var(--paint-mix-49));
+  --g-border: var(--glass-border, var(--paint-mix-50));
+  --g-hi: var(--glass-highlight, var(--paint-mix-43));
+  --g-shadow: var(--glass-shadow, 0 16px 48px var(--paint-mix-12));
+  --g-active: var(--glass-active, var(--paint-mix-45));
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --danger: var(--paint-b3261e);
+
+  position: relative;
+  isolation: isolate;
+  min-height: calc(100dvh - 76px);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: clamp(48px, 8vw, 96px) 20px;
+  background: var(--bg);
+}
+html[data-theme="dark"] .onboarding-page {
+  --g-bg: var(--paint-mix-51);
+  --g-strong: var(--paint-mix-52);
+  --g-border: var(--paint-mix-53);
+  --g-hi: var(--paint-mix-54);
+  --g-shadow: 0 16px 48px var(--paint-mix-55);
+  --g-active: var(--paint-mix-37);
+  --danger: var(--paint-ff8a80);
+}
+
+/* Ã¢â€â‚¬Ã¢â€â‚¬ Ambient blobs Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+.onboarding-ambient {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.onboarding-ambient::before,
+.onboarding-ambient::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  animation: ob-drift 28s ease-in-out infinite alternate;
+}
+
+.onboarding-ambient::before {
+  width: 560px;
+  height: 560px;
+  top: -12%;
+  left: -10%;
+  opacity: 0.42;
+  background: radial-gradient(
+    circle,
+    var(--color-secondary, var(--color-secondary)),
+    var(--paint-transparent) 68%
+  );
+}
+
+.onboarding-ambient::after {
+  width: 500px;
+  height: 500px;
+  bottom: -14%;
+  right: -8%;
+  opacity: 0.32;
+  background: radial-gradient(
+    circle,
+    var(--color-primary, var(--color-primary)),
+    var(--paint-transparent) 68%
+  );
+  animation-delay: -13s;
+}
+
+@keyframes ob-drift {
+  to {
+    transform: translate3d(55px, 40px, 0) scale(1.1);
+  }
+}
+
+/* Ã¢â€â‚¬Ã¢â€â‚¬ Glass panel Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+.onboarding-panel {
+  position: relative;
+  width: min(680px, 100%);
+  background: var(--g-strong);
+  border: 1px solid var(--g-border);
+  border-radius: 28px;
+  box-shadow:
+    inset 0 1px 0 var(--g-hi),
+    var(--g-shadow);
+  padding: clamp(28px, 5vw, 52px);
+  animation: ob-rise 0.75s var(--ease) both;
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .onboarding-panel {
+    background: var(--g-bg);
+    backdrop-filter: blur(26px) saturate(175%);
+    -webkit-backdrop-filter: blur(26px) saturate(175%);
+  }
+}
+
+/* specular sheen */
+.onboarding-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    var(--paint-mix-56),
+    var(--paint-transparent) 46%
+  );
+  opacity: 0.65;
+}
+html[data-theme="dark"] .onboarding-panel::before {
+  opacity: 0.22;
+}
+
+/* children sit above sheen */
+.onboarding-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes ob-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(6px);
+  }
+}
+
+/* Ã¢â€â‚¬Ã¢â€â‚¬ Progress bar Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+.onboarding-progress {
+  margin-bottom: 28px;
+}
+
+.onboarding-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
+}
+
+.onboarding-progress-track {
+  width: 100%;
+  height: 6px;
+  background: color-mix(in srgb, var(--accent) 18%, var(--paint-transparent));
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.onboarding-progress-track > div {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--color-secondary, var(--color-secondary)),
+    var(--color-primary, var(--color-primary))
+  );
+  border-radius: 99px;
+  transition: width 0.5s var(--ease);
+}
+
+/* Ã¢â€â‚¬Ã¢â€â‚¬ Step content Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+.onboarding-step {
+  animation: ob-step-in 0.45s var(--ease) both;
+}
+
+@keyframes ob-step-in {
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+}
+
+/* eyebrow label */
+.onboarding-step .eyebrow,
+.eyebrow {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.onboarding-step h1 {
+  margin: 0 0 10px;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  background: linear-gradient(120deg, var(--text) 40%, var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: var(--paint-transparent);
+}
+
+.onboarding-step > p {
+  margin: 0 0 24px;
+  font-size: 0.97rem;
+  color: color-mix(in srgb, var(--text) 70%, var(--paint-transparent));
+  line-height: 1.6;
+}
+
+/* Ã¢â€â‚¬Ã¢â€â‚¬ Feature icon (welcome / completion) Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+.onboarding-feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  font-size: 1.5rem;
+  margin-bottom: 18px;
+  color: var(--accent);
+  background: none;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* Ã¢â€â‚¬Ã¢â€â‚¬ Info notice Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+.onboarding-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 14px 16px;
+  font-size: 0.87rem;
+  line-height: 1.6;
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 10%, var(--paint-transparent));
+  border: 1px solid
+    color-mix(in srgb, var(--accent) 20%, var(--paint-transparent));
+  border-radius: 14px;
+}
+
+.onboarding-info svg {
+  /* icon beside text */
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--accent);
+  font-size: 0.95rem;
+}
+
+/* Ã¢â€â‚¬Ã¢â€â‚¬ Selection-card grids Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+.goal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px;
+  margin-top: 4px;
+}
+
+.experience-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+/* Ã¢â€â‚¬Ã¢â€â‚¬ SelectionCard Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+.selection-card {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 16px;
+  text-align: left;
+  cursor: pointer;
+
+  background: var(--g-bg);
+  border: 1.5px solid var(--g-border);
+  border-radius: 18px;
+  box-shadow:
+    inset 0 1px 0 var(--g-hi),
+    0 4px 16px var(--paint-mix-26);
+  transition:
+    border-color 0.25s var(--ease),
+    box-shadow 0.25s var(--ease),
+    transform 0.25s var(--ease),
+    background 0.25s var(--ease);
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .selection-card {
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+  }
+}
+
+.selection-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--paint-transparent));
+  box-shadow:
+    inset 0 1px 0 var(--g-hi),
+    0 8px 28px var(--paint-mix-12);
+  transform: translateY(-3px);
+}
+
+.selection-card:focus-visible {
+  outline: 3px solid
+    color-mix(in srgb, var(--accent) 50%, var(--paint-transparent));
+  outline-offset: 3px;
+}
+
+/* selected state */
+.selection-card.selected {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--g-bg));
+  box-shadow:
+    inset 0 1px 0 var(--g-hi),
+    0 0 0 3px color-mix(in srgb, var(--accent) 20%, var(--paint-transparent)),
+    0 8px 28px var(--paint-mix-57);
+  transform: translateY(-2px);
+}
+
+/* top row: icon + check */
+.selection-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 28px;
+}
+
+.selection-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  font-size: 1rem;
+  color: var(--accent);
+  flex-shrink: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.selection-check {
+  font-size: 0.85rem;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, var(--paint-transparent));
+  border-radius: 50%;
+  padding: 5px;
+  line-height: 1;
+}
+
+.selection-title {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.selection-description {
+  font-size: 0.83rem;
+  color: color-mix(in srgb, var(--text) 68%, var(--paint-transparent));
+  line-height: 1.5;
+}
+
+/* skill tags */
+.selection-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 4px;
+}
+
+.selection-skill {
+  display: inline-block;
+  padding: 3px 9px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 99px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--paint-transparent));
+  border: 1px solid
+    color-mix(in srgb, var(--accent) 20%, var(--paint-transparent));
+  letter-spacing: 0.01em;
+}
+
+/* Ã¢â€â‚¬Ã¢â€â‚¬ Review step Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+.onboarding-review {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.onboarding-review > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--accent) 7%, var(--g-bg));
+  border: 1px solid var(--g-border);
+  font-size: 0.9rem;
+  gap: 12px;
+}
+
+.onboarding-review > div > span {
+  color: color-mix(in srgb, var(--text) 65%, var(--paint-transparent));
+  font-size: 0.83rem;
+}
+
+.onboarding-review > div > strong {
+  font-weight: 700;
+  color: var(--text);
+  text-align: right;
+}
+
+/* Ã¢â€â‚¬Ã¢â€â‚¬ Error message Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+.onboarding-error {
+  margin: 16px 0 0;
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--danger);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Ã¢â€â‚¬Ã¢â€â‚¬ Action buttons Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+.onboarding-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.onboarding-btn {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: 14px;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.3s var(--ease),
+    transform 0.3s var(--ease),
+    box-shadow 0.3s var(--ease),
+    color 0.3s var(--ease);
+  text-decoration: none;
+}
+
+/* primary */
+.onboarding-btn.primary {
+  background: var(--btn-primary);
+  color: var(--btn-text);
+  box-shadow:
+    inset 0 1px 0 var(--paint-mix-25),
+    0 8px 24px
+      color-mix(in srgb, var(--btn-primary) 38%, var(--paint-transparent));
+}
+
+.onboarding-btn.primary:hover {
+  background: var(--btn-hover);
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 var(--paint-mix-25),
+    0 12px 30px
+      color-mix(in srgb, var(--btn-primary) 45%, var(--paint-transparent));
+}
+
+.onboarding-btn.primary:active {
+  transform: scale(0.98);
+}
+
+.onboarding-btn.primary:focus-visible {
+  outline: 3px solid
+    color-mix(in srgb, var(--accent) 50%, var(--paint-transparent));
+  outline-offset: 3px;
+}
+
+/* secondary / ghost */
+.onboarding-btn.secondary {
+  background: var(--g-bg);
+  color: var(--text);
+  border: 1.5px solid var(--g-border);
+  box-shadow:
+    inset 0 1px 0 var(--g-hi),
+    0 4px 14px var(--paint-mix-26);
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .onboarding-btn.secondary {
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+  }
+}
+
+.onboarding-btn.secondary:hover {
+  background: var(--g-strong);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--paint-transparent));
+  transform: translateY(-2px);
+}
+
+.onboarding-btn.secondary:active {
+  transform: scale(0.98);
+}
+
+.onboarding-btn.secondary:focus-visible {
+  outline: 3px solid
+    color-mix(in srgb, var(--accent) 40%, var(--paint-transparent));
+  outline-offset: 3px;
+}
+
+/* Ã¢â€â‚¬Ã¢â€â‚¬ Completion panel Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+.completion-panel {
+  text-align: center;
+}
+
+.completion-panel .onboarding-feature-icon {
+  margin-inline: auto;
+  width: 64px;
+  height: 64px;
+  font-size: 1.8rem;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.completion-panel h1 {
+  margin: 0 0 12px;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  background: linear-gradient(120deg, var(--text) 40%, var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: var(--paint-transparent);
+}
+
+.completion-panel > p {
+  font-size: 0.97rem;
+  color: color-mix(in srgb, var(--text) 72%, var(--paint-transparent));
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.completion-panel .onboarding-btn {
+  margin-top: 28px;
+}
+
+/* Ã¢â€â‚¬Ã¢â€â‚¬ Responsive Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+@media (max-width: 540px) {
+  .onboarding-panel {
+    padding: 24px 18px;
+  }
+
+  .goal-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .onboarding-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .onboarding-btn {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .goal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Ã¢â€â‚¬Ã¢â€â‚¬ Reduced motion Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+@media (prefers-reduced-motion: reduce) {
+  .onboarding-ambient::before,
+  .onboarding-ambient::after {
+    animation: none;
+  }
+
+  .onboarding-panel,
+  .onboarding-step {
+    animation: none;
+  }
+
+  .selection-card,
+  .onboarding-btn,
+  .onboarding-progress-track > div {
+    transition: none;
+  }
+
+  .selection-card:hover,
+  .onboarding-btn:hover {
+    transform: none;
+  }
+}
