@@ -22,6 +22,8 @@ class User extends Authenticatable
         'email',
         'password_hash',
         'password',
+        'tow_factor_secret',
+        'tow_factor_recovery_codes',
     ];
 
     protected $hidden = ['password_hash', 'remember_token'];
