@@ -1,20 +1,28 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link, useNavigate } from "react-router";import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faRightToBracket,
     faRoute,
     faChartLine,
     faRobot,
     faArrowRight,
-    faCircleInfo
+    faCircleInfo,
+    faCircleExclamation
+    
 } from "@fortawesome/free-solid-svg-icons";
 import AuthField from "../components/AuthField";
 import darkLogo from "../../../assets/skillPathAI_logo_dark_mode.png";
 import lightLogo from "../../../assets/skillPathAI_logo_light_mode.png";
 import "../auth.css";
 import GoogleLoginButton from "../components/GoogleLoginButton";
+import { useAuth } from "../../../hooks/useAuth";
+
 export default function Login() {
+    const { login } = useAuth()
+    const navigate = useNavigate();
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const [form, setForm] = useState({ email: "", password: "" });
     const [errors, setErrors] = useState({});
     const [rememberMe, setRememberMe] = useState(false);
@@ -41,8 +49,13 @@ export default function Login() {
         setNotice("");
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
+
+        if (isSubmitting) return;
+
+        setNotice("");
+
         const nextErrors = {};
 
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
@@ -50,13 +63,95 @@ export default function Login() {
         }
 
         if (!form.password) {
-            nextErrors.password = "Password is required";
+            nextErrors.password = "Password is required.";
         }
 
         setErrors(nextErrors);
+
         if (Object.keys(nextErrors).length > 0) return;
 
-        setNotice("Form validated. Secure login will be enabled when Laravel authentication is connected.");
+        setIsSubmitting(true);
+
+        try {
+
+            const user = await login({
+                email: form.email.trim(),
+                password: form.password,
+                remember: rememberMe
+            });
+
+            if (!user) {
+                setErrors({
+                    general: "Unable to verify your session."
+                });
+                return;
+            }
+            if (!user.email_verified_at) {
+                navigate("/verify-email", { replace: true });
+                return;
+            }
+
+            switch (user.role) {
+
+                case "admin":
+                    navigate("/admin", { replace: true });
+                    break;
+
+                case "instructor":
+                    navigate("/instructor", { replace: true });
+                    break;
+
+                case "student":
+                    navigate("/dashboard", { replace: true });
+                    break;
+
+                default:
+                    navigate("/", { replace: true });
+            }
+
+        } catch (error) {
+
+            const status = error.response?.status;
+            const data = error.response?.data;
+
+            if (status === 422 && data?.errors) {
+
+                const serverErrors = {};
+
+                Object.entries(data.errors).forEach(([field, messages]) => {
+                    serverErrors[field] = messages[0];
+                });
+
+                setErrors(serverErrors);
+
+            } else if (status === 419) {
+
+                setErrors({
+                    general: "Your session has expired. Please try again."
+                });
+
+            } else if (status === 429) {
+
+                setErrors({
+                    general: "Too many login attempts. Please try again later."
+                });
+
+            } else if (status === 401) {
+
+                setErrors({
+                    general: "Invalid email or password."
+                });
+
+            } else {
+
+                setErrors({
+                    general: "Unable to log in. Please try again."
+                });
+            }
+
+        } finally {
+            setIsSubmitting(false);
+        }
     }
 
     return (
@@ -145,10 +240,33 @@ export default function Login() {
                                 Forgot password?
                             </Link>
                         </div>
+                        {errors.general && (
+                            <p className="auth-error" role="alert">
+                            
+                                <FontAwesomeIcon
+                                    icon={faCircleExclamation}
+                                    className="auth-error-icon"
+                                    aria-hidden="true"
+                                />
 
-                        <button type="submit" className="auth-submit">
-                            <span>Log in</span>
-                            <FontAwesomeIcon icon={faArrowRight} aria-hidden="true" />
+                                <span>{errors.general}</span>
+                        
+                            </p>
+                        )}
+                        <button
+                            type="submit"
+                            className="auth-submit"
+                            disabled={isSubmitting}
+                            aria-busy={isSubmitting}
+                        >
+                            <span>
+                                {isSubmitting ? "Logging in..." : "Log in"}
+                            </span>
+
+                            <FontAwesomeIcon
+                                icon={faArrowRight}
+                                aria-hidden="true"
+                            />
                         </button>
 
                         {notice && (

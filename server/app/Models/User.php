@@ -9,8 +9,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Services\EmailVerificationService;
 
-class User extends Authenticatable
+use Illuminate\Support\Facades\Route;
+class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
@@ -24,6 +27,7 @@ class User extends Authenticatable
         'password',
         'tow_factor_secret',
         'tow_factor_recovery_codes',
+        'google_id',
     ];
 
     protected $hidden = ['password_hash', 'remember_token'];
@@ -81,5 +85,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Skill::class, 'user_skills')
             ->using(UserSkill::class)->withPivot('mastery_score', 'updated_at');
+    }
+    public function sendEmailVerificationNotification(): void
+    {
+        app(EmailVerificationService::class)->send($this);
     }
 }

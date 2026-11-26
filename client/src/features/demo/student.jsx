@@ -4,7 +4,8 @@ import { useState } from "react";
 import { Link, useParams } from "react-router";
 import { resolvePath, skillById } from "./catalog";
 import { useDemo, activeEnrollment } from "./store";
-import { Header, Empty, Notice, SkillTree, Confirm } from "./ui";
+import { Header, Empty, Notice, Confirm } from "../../components/ui/SharedUi";
+import SkillTree from "./DemoSkillTree";
 import { orderedLessons, reasonFor } from "./planning";
 
 export function PathDetail({ dashboard = false }) {

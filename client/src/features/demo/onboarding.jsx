@@ -2,7 +2,7 @@ import TechnologyMark from "./TechnologyMark";
 import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import { useDemo } from "./store";
-import { Header, Notice } from "./ui";
+import { Header, Notice } from "../../components/ui/SharedUi";
 
 const steps = [
   "Welcome",

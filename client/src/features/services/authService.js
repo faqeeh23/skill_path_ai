@@ -1,6 +1,6 @@
-import api from "./api"
+import api from "./api";
 
-// CSRF Protection 
+// CSRF Protection
 export async function getCsrfCookie() {
     await api.get("/sanctum/csrf-cookie");
 }
@@ -8,13 +8,16 @@ export async function getCsrfCookie() {
 // Register
 export async function register(payload) {
     await getCsrfCookie();
+
     const response = await api.post("/register", payload);
+
     return response.data;
 }
 
-// Login 
+// Login
 export async function login(payload) {
     await getCsrfCookie();
+
     const response = await api.post("/login", payload);
 
     return response.data;
@@ -23,39 +26,48 @@ export async function login(payload) {
 // Get Authenticated User
 export async function getUser() {
     const response = await api.get("/api/user");
+
     return response.data;
 }
 
 // Forgot Password
-export async function requestPasswordReset(email ) {
+export async function requestPasswordReset(email) {
     await getCsrfCookie();
-    await api.post("/forgot-password", {email});
+
+    await api.post("/forgot-password", { email });
 
     return {
-        demo: false,
         message: "If an account exists for this email, you will receive a reset link.",
-    }
+    };
 }
 
 // Reset Password
-
-export async function resetPassword(payload){
+export async function resetPassword(payload) {
     await getCsrfCookie();
-    await api.post("/reset-password", payload)
+
+    await api.post("/reset-password", payload);
+
     return {
-        demo : false ,
-        message : "Your password has been reset successfully ."
-    }
+        message: "Your password has been reset successfully.",
+    };
 }
 
 // Resend Verification Email
-export async function resendVerificationEmail(){
+export async function resendVerificationEmail() {
     await api.post("/email/verification-notification");
 
     return {
-        demo :false,
-        message: "Verification email requested",
-    }
+        message: "A new verification code has been sent to your email.",
+    };
+}
+
+// Verify Email Code
+export async function verifyEmailCode(code) {
+    await api.post("/api/email/verification-code", { code });
+
+    return {
+        message: "Your email has been verified successfully.",
+    };
 }
 
 // Logout

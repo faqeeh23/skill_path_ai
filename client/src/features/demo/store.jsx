@@ -6,14 +6,7 @@ const Context = createContext(null);
 function load() {
   try {
     const value = JSON.parse(localStorage.getItem(KEY));
-    const theme =
-      localStorage.getItem("theme") ??
-      (window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light");
-    if (value?.version === 3) value.theme = theme;
-    const fresh = { ...initialDemo(), theme };
-    return value?.version === 3 ? { ...initialDemo(), ...value } : fresh;
+    return value?.version === 3 ? { ...initialDemo(), ...value } : initialDemo();
   } catch {
     return initialDemo();
   }
@@ -27,14 +20,6 @@ export function DemoProvider({ children }) {
       /* Works for this visit if storage is disabled. */
     }
   }, [state]);
-  useEffect(() => {
-    document.documentElement.dataset.theme = state.theme ?? "light";
-    try {
-      localStorage.setItem("theme", state.theme ?? "light");
-    } catch {
-      /* Optional theme preference. */
-    }
-  }, [state.theme]);
   return (
     <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>
   );

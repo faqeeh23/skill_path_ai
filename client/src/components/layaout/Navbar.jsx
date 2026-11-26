@@ -21,7 +21,8 @@ import {
   faCircleQuestion,
   faLifeRing,
 } from "@fortawesome/free-solid-svg-icons";
-import { useDemo } from "../../features/demo/store";
+import { useTheme } from "../../hooks/useTheme";
+import { useAuth } from "../../hooks/useAuth";
 import { showMessage } from "../../lib/alerts";
 import logo from "../../assets/skillPathAI_logo_dark_mode.png";
 import "../../styles/Navbar.css";
@@ -123,10 +124,11 @@ export default function Navbar() {
     drawer = useRef(null),
     searchDialog = useRef(null),
     pointer = useRef(false);
-  const { state, dispatch } = useDemo(),
-    location = useLocation(),
+  const location = useLocation(),
     navigate = useNavigate();
-  const theme = state.theme ?? "light";
+  const { theme, toggle: toggleTheme } = useTheme();
+  const { user } = useAuth();
+  const dashboard = user?.role === "student" ? "/dashboard" : null;
   function closeAll() {
     setOpen(null);
     setMobile(false);
@@ -225,12 +227,7 @@ export default function Navbar() {
       type="button"
       className="sn-icon-button"
       aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-      onClick={() =>
-        dispatch({
-          type: "PATCH",
-          value: { theme: theme === "light" ? "dark" : "light" },
-        })
-      }
+      onClick={toggleTheme}
     >
       <Icon icon={theme === "light" ? faMoon : faSun} />
     </button>
@@ -356,12 +353,14 @@ export default function Navbar() {
               <Icon icon={faMagnifyingGlass} />
             </button>
             {toggle}
-            <Link className="sn-signin" to="/login" onClick={closeAll}>
-              Sign in
-            </Link>
-            <Link className="sn-cta" to="/register" onClick={closeAll}>
-              Get Started
-            </Link>
+            {dashboard ? (
+              <Link className="sn-cta" to={dashboard} onClick={closeAll}>My dashboard</Link>
+            ) : (
+              <>
+                <Link className="sn-signin" to="/login" onClick={closeAll}>Sign in</Link>
+                <Link className="sn-cta" to="/register" onClick={closeAll}>Get Started</Link>
+              </>
+            )}
           </div>
         </div>
         <div className="sn-mobile-tools">
@@ -452,12 +451,14 @@ export default function Navbar() {
             </NavLink>
           </nav>
           <div className="sn-mobile-auth">
-            <Link to="/login" onClick={closeAll}>
-              Sign in
-            </Link>
-            <Link className="sn-cta" to="/register" onClick={closeAll}>
-              Get Started
-            </Link>
+            {dashboard ? (
+              <Link className="sn-cta" to={dashboard} onClick={closeAll}>My dashboard</Link>
+            ) : (
+              <>
+                <Link to="/login" onClick={closeAll}>Sign in</Link>
+                <Link className="sn-cta" to="/register" onClick={closeAll}>Get Started</Link>
+              </>
+            )}
           </div>
         </div>
       </dialog>

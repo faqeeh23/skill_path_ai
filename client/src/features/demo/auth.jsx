@@ -16,7 +16,7 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router";
 import { demoUsers, plans } from "./catalog";
 import { useDemo } from "./store";
-import { Header, Notice, Confirm, ThemeToggle } from "./ui";
+import { Header, Notice, Confirm, ThemeToggle } from "../../components/ui/SharedUi";
 import { subscriptionConfig } from "../subscription/plans";
 
 export function Auth({ mode = "login" }) {

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { skillById } from "./catalog";
 import { useDemo, activeEnrollment } from "./store";
-import { Header, Notice, Empty, Confirm } from "./ui";
+import { Header, Notice, Empty, Confirm } from "../../components/ui/SharedUi";
 
 export default function Projects() {
   const { state, dispatch, pathById } = useDemo();

@@ -401,6 +401,17 @@ html[data-theme="dark"] .recovery-card::before {
   text-align: left;
 }
 
+.verification-card .verification-resend {
+  color: var(--accent);
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: none;
+}
+
+.verification-card .verification-resend:hover:not(:disabled) {
+  background: var(--surface2);
+}
+
 .verification-info {
   display: flex;
   align-items: flex-start;

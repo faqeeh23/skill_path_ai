@@ -16,22 +16,27 @@ export default function ForgotPassword() {
         e.preventDefault();
         if (status === "loading") return;
 
-        setError("")
-        setMessage("")
+        setError("");
+        setMessage("");
+        const normalizedEmail = email.trim();
 
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
           setError("Please enter a valid email address.");
           return;
         }
 
         try {
             setStatus("loading");
-            const result = await requestPasswordReset(email.trim())
-            setMessage(result.message)
-            setStatus(result.demo ? "demo" : "success")
+            const result = await requestPasswordReset(normalizedEmail);
+            setMessage(result.message);
+            setStatus("success");
         } catch (err) {
-            setError(err.message)
-            setStatus("idle")
+            setError(
+                err.response?.data?.errors?.email?.[0] ||
+                err.response?.data?.message ||
+                "Unable to send reset link. Please try again."
+            );
+            setStatus("idle");
         }
     }
 

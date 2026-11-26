@@ -516,35 +516,3 @@ export const tutorActions = [
   "Summarize lesson",
   "Practice question",
 ];
-export const navigation = {
-  student: [
-    ["", "Overview"],
-    ["path", "My learning paths"],
-    ["explore", "Explore paths"],
-    ["skills", "Skill profile"],
-    ["assessment", "Assessments"],
-    ["projects", "Final project"],
-    ["notifications", "Notifications"],
-    ["profile", "My profile"],
-    ["settings", "Settings"],
-  ],
-  instructor: [
-    ["", "Overview"],
-    ["paths", "Learning paths"],
-    ["lessons", "Skills & lessons"],
-    ["resources", "Video & resources"],
-    ["quizzes", "Quiz management"],
-    ["students", "Student progress"],
-    ["projects", "Project reviews"],
-  ],
-  admin: [
-    ["", "Overview"],
-    ["users", "Users"],
-    ["instructors", "Instructors"],
-    ["goals", "Career goals"],
-    ["paths", "Learning paths"],
-    ["content", "Platform content"],
-    ["subscriptions", "Subscriptions"],
-    ["analytics", "Analytics"],
-  ],
-};

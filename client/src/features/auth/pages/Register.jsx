@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router";
+import {  useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faRocket,
@@ -15,7 +15,7 @@ import AuthField from "../components/AuthField";
 import darkLogo from "../../../assets/skillPathAI_logo_dark_mode.png";
 import lightLogo from "../../../assets/skillPathAI_logo_light_mode.png";
 import "../auth.css";
-
+import { useAuth } from "../../../hooks/useAuth";
 const initialForm = {
     name: "",
     email: "",
@@ -34,14 +34,14 @@ function validateRegistration(form) {
         errors.email = "Enter a valid email address.";
     }
 
-    if (form.password.length > 0 && form.password.length < 8) {
+    if (form.password.length < 8) {
         errors.password = "Password must be at least 8 characters.";
     }
-
-    if (form.confirmPassword !== form.password) {
+    if (!form.confirmPassword) {
+        errors.confirmPassword = "Please confirm your password.";
+    } else if (form.confirmPassword !== form.password) {
         errors.confirmPassword = "Passwords do not match.";
     }
-
     return errors;
 }
 
@@ -51,7 +51,9 @@ export default function Register() {
     const [acceptedTerms, setAcceptedTerms] = useState(false);
     const [notice, setNotice] = useState("");
     const [theme, setTheme] = useState(() => document.documentElement.getAttribute("data-theme") || "light");
-
+    const { register } = useAuth();
+    const navigate = useNavigate();
+    const [isSubmitting, setIsSubmitting] = useState(false);
     useEffect(() => {
         const syncTheme = () => setTheme(document.documentElement.getAttribute("data-theme") || "light");
         syncTheme();
@@ -72,19 +74,94 @@ export default function Register() {
         setNotice("");
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
 
+
+        if (isSubmitting) return;
+
+        setNotice("");
+
         const nextErrors = validateRegistration(form);
+
         if (!acceptedTerms) {
             nextErrors.terms = "You must accept the terms.";
         }
 
         setErrors(nextErrors);
+
+        console.log("Validation errors:", nextErrors);
+
         if (Object.keys(nextErrors).length > 0) return;
 
-        setNotice("Your form is valid. Account creation and trial activation will be available when the backend is connected.");
+        setIsSubmitting(true);
+
+        try {
+            console.log("Sending registration request...");
+
+            const user = await register({
+                name: form.name.trim(),
+                email: form.email.trim(),
+                password: form.password,
+                password_confirmation: form.confirmPassword
+            });
+
+            console.log("Authentication confirmed:", !!user);
+
+            if (!user) {
+                setErrors({
+                    general: "Account created, but authentication could not be confirmed."
+                });
+
+                return;
+            }
+
+            navigate("/verify-email", { replace: true });
+            
+
+        } catch (error) {
+
+            const status = error.response?.status;
+            const data = error.response?.data;
+
+            console.error("Registration failed:", status);
+
+            if (status === 422 && data?.errors) {
+
+                const serverErrors = {};
+
+                Object.entries(data.errors).forEach(([field, messages]) => {
+
+                    const fieldName =
+                        field === "password_confirmation"
+                            ? "confirmPassword"
+                            : field;
+
+                    serverErrors[fieldName] = messages[0];
+                });
+
+                setErrors(serverErrors);
+                console.log("Validation errors:", nextErrors);
+
+            } else if (status === 419) {
+
+                setErrors({
+                    general: "Your session has expired. Please try again."
+                });
+
+            } else {
+
+                setErrors({
+                    general: "Unable to create your account. Please try again."
+                });
+            }
+
+        } finally {
+            setIsSubmitting(false);
+        }
     }
+
+
 
     return (
         <section className="auth-page register-page">
@@ -194,10 +271,19 @@ export default function Register() {
                                 <span>{errors.terms}</span>
                             </p>
                         )}
+                        {errors.general && (
+                            <p className="auth-error" role="alert">
+                                <FontAwesomeIcon
+                                    icon={faCircleExclamation}
+                                    className="auth-error-icon"
+                                    aria-hidden="true"
+                                />
 
-                        <button type="submit" className="auth-submit">
-                            <span>Start my free trial</span>
-                            <FontAwesomeIcon icon={faArrowRight} aria-hidden="true" />
+                                <span>{errors.general}</span>
+                            </p>
+                        )}
+                        <button type="submit" className="auth-submit" disabled={isSubmitting}>
+                            {isSubmitting ? "Creating your account…" : "Start my free trial"}
                         </button>
 
                         {notice && (

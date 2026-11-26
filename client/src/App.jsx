@@ -3,11 +3,17 @@ import PublicLayout from "./layouts/PublicLayout";
 import Home from "./pages/Home";
 import ExplorePaths from "./pages/explore/ExplorePaths";
 import { DemoProvider } from "./features/demo/store";
-import { Guard, Workspace } from "./features/demo/ui";
-import { Auth, Pricing, Checkout, NotFound } from "./features/demo/auth";
+import Workspace from "./layouts/Workspace";
+import Guard from "./routes/Guard";
+import { Pricing, Checkout, NotFound } from "./features/demo/auth";
+import ForgotPassword from "./features/auth/pages/ForgotPassword";
+import ResetPassword from "./features/auth/pages/ResetPassword";
+import Register from "./features/auth/pages/Register";
+import VerifyEmail from "./features/auth/pages/VerifyEmail";
+import Login from "./features/auth/pages/Login"
+import StudentDashboard from "./features/student/StudentDashboard";
 import Onboarding from "./features/demo/onboarding";
 import {
-  Overview,
   LearningPaths,
   PathDetail,
   SkillProfile,
@@ -32,23 +38,11 @@ export default function App() {
             <Route path="paths/:pathId" element={<PathDetail />} />
             <Route path="pricing" element={<Pricing />} />
             <Route path="checkout" element={<Checkout />} />
-            <Route path="login" element={<Auth key="login" mode="login" />} />
-            <Route
-              path="register"
-              element={<Auth key="register" mode="register" />}
-            />
-            <Route
-              path="forgot-password"
-              element={<Auth key="forgot" mode="forgot" />}
-            />
-            <Route
-              path="reset-password"
-              element={<Auth key="reset" mode="reset" />}
-            />
-            <Route
-              path="verify-email"
-              element={<Auth key="verify" mode="verify" />}
-            />
+            <Route path="register" element={<Register />} />
+            <Route path="login" element={<Login />} />
+            <Route path="forgot-password" element={<ForgotPassword />} />
+            <Route path="reset-password" element={<ResetPassword />} />
+            <Route path="verify-email" element={<VerifyEmail />} />
             <Route
               path="onboarding"
               element={
@@ -67,7 +61,7 @@ export default function App() {
               </Guard>
             }
           >
-            <Route index element={<Overview />} />
+            <Route index element={<StudentDashboard />} />
             <Route path="path" element={<LearningPaths />} />
             <Route
               path="explore"

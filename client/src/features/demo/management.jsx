@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useLocation } from "react-router";
 import { paths, skillById, leavesOf } from "./catalog";
 import { useDemo } from "./store";
-import { Header, Notice, Empty, Confirm } from "./ui";
+import { Header, Notice, Empty, Confirm } from "../../components/ui/SharedUi";
 
 const configs = {
   users: { title: "User management", key: "users", name: "name" },

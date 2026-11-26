@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { Link, useParams } from "react-router";
 import { skillById, tutorActions } from "./catalog";
 import { useDemo, activeEnrollment } from "./store";
-import { Header, Empty, Notice } from "./ui";
+import { Header, Empty, Notice } from "../../components/ui/SharedUi";
 import { orderedLessons, reasonFor } from "./planning";
 
 function Tutor({ lesson }) {

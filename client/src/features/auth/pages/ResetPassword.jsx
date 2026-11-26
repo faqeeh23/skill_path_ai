@@ -13,7 +13,6 @@ export default function ResetPassword() {
 
   const [form, setForm] = useState({ password: "", confirmPassword: "" });
   const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
   const [status, setStatus] = useState("idle");
 
   const hasValidParams = Boolean(token && email);
@@ -27,6 +26,8 @@ export default function ResetPassword() {
     e.preventDefault();
     if (!hasValidParams || status === "loading") return;
 
+    setError("");
+
     if (form.password.length < 8) {
       setError("Password must contain at least 8 characters.");
       return;
@@ -39,21 +40,23 @@ export default function ResetPassword() {
 
     try {
       setStatus("loading");
-      setError("");
-      setMessage("");
-
-      const result = await resetPassword({
+      await resetPassword({
         token,
         email,
         password: form.password,
         password_confirmation: form.confirmPassword
       });
 
-      setMessage(result.message);
-      setStatus(result.demo ? "demo" : "success");
+      setStatus("success");
       setForm({ password: "", confirmPassword: "" });
     } catch (err) {
-      setError(err.message);
+      setError(
+        err.response?.data?.errors?.password?.[0] ||
+        err.response?.data?.errors?.email?.[0] ||
+        err.response?.data?.errors?.token?.[0] ||
+        err.response?.data?.message ||
+        "Unable to reset password. Please try again."
+      );
       setStatus("idle");
     }
   }
@@ -119,7 +122,6 @@ export default function ResetPassword() {
               </form>
             )}
 
-            {message && <div className="recovery-feedback" role="status">{message}</div>}
           </>
         )}
       </div>
