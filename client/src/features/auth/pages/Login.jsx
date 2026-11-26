@@ -16,7 +16,6 @@ import lightLogo from "../../../assets/skillPathAI_logo_light_mode.png";
 import "../auth.css";
 import GoogleLoginButton from "../components/GoogleLoginButton";
 import { useAuth } from "../../../hooks/useAuth";
-
 export default function Login() {
     const { login } = useAuth()
     const navigate = useNavigate();

@@ -5,6 +5,6 @@ export function loginWithGoogle() {
         throw new Error("Google authentication is not configured yet.")
     }
 
-    const backendUrl = API_URL.replace(/\+$/, "");
-    window.location.assign(`${backendUrl}/auth/google/redirect`)
+    const backendUrl = API_URL.replace(/\/+$/, "");
+    window.location.assign(`${backendUrl}/auth/google`);
 }

@@ -34,8 +34,34 @@ Route::middleware('auth:sanctum')->group(function () {
 // Authenticated and verified users
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
-    Route::get('/student/dashboard', StudentDashboardController::class);
+    // Student Routes
+    Route::prefix('student')
+        ->middleware('can:access-student')
+        ->group(function () {
 
+            Route::get('/dashboard', StudentDashboardController::class);
+
+        });
+
+    // Instructor Routes
+    Route::prefix('instructor')
+        ->middleware('can:access-instructor')
+        ->group(function () {
+
+            // Future instructor routes
+
+        });
+
+    // Admin Routes
+    Route::prefix('admin')
+        ->middleware('can:access-admin')
+        ->group(function () {
+
+            // Future admin routes
+
+        });
+
+    // Temporary verification test
     Route::get('/test-verified', function () {
         return response()->json([
             'message' => 'Your email is verified.',

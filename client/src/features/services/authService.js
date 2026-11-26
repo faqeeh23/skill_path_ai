@@ -74,3 +74,4 @@ export async function verifyEmailCode(code) {
 export async function logout() {
     await api.post("/logout");
 }
+

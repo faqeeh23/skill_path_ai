@@ -1,0 +1,63 @@
+.app-error-page {
+  width: min(100% - 2rem, 42rem);
+  margin: clamp(2rem, 9vw, 6rem) auto;
+  padding: clamp(1.5rem, 5vw, 3rem);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--accent);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.app-error-page .app-error-code {
+  margin: 0 0 .75rem;
+  color: var(--accent);
+  font-weight: 650;
+}
+
+.app-error-page h1 {
+  margin: 0;
+  font-size: clamp(1.85rem, 5vw, 3rem);
+  line-height: 1.15;
+}
+
+.app-error-page .app-error-description {
+  margin: 1rem 0 1.5rem;
+  color: var(--text-muted);
+  max-width: 48ch;
+}
+
+.app-error-actions {
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+
+.app-error-actions > :is(a, button) {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: .6rem 1rem;
+  border: 1px solid var(--btn-primary);
+  border-radius: var(--radius-md);
+  background: var(--btn-primary);
+  color: var(--btn-text);
+  font: inherit;
+  font-weight: 650;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.app-error-actions > :is(a, button):hover {
+  background: var(--btn-hover);
+}
+
+.app-error-actions > .app-error-home {
+  background: var(--surface);
+  color: var(--accent);
+  border-color: var(--border);
+}
+
+.app-error-actions > .app-error-home:hover {
+  background: var(--surface2);
+}

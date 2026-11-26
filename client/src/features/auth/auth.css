@@ -705,7 +705,7 @@ html[data-theme="dark"] .auth-input-wrap input {
 /* Feedback */
 .google-login-notice {
   margin: 12px 0 0;
-  color: var(--color-primary, var(--color-primary));
+  color: var(--danger);
   font-size: 0.82rem;
   line-height: 1.5;
 }

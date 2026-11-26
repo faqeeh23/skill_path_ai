@@ -1,5 +1,6 @@
 import { Navigate, useLocation } from "react-router";
 import { useAuth } from "../hooks/useAuth";
+import ErrorPage from "../pages/ErrorPage";
 
 export default function Guard({ children, role }) {
 
@@ -11,7 +12,7 @@ export default function Guard({ children, role }) {
     }
 
     if (error && !user) {
-        return <p>Unable to verify your session.</p>;
+        return <ErrorPage status="session" />;
     }
 
     if (!isAuthenticated) {
@@ -25,7 +26,7 @@ export default function Guard({ children, role }) {
     }
 
     if (role && user.role !== role) {
-        return <Navigate to="/" replace />;
+        return <Navigate to="/forbidden" replace />;
     }
 
     return children;

@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Support\Facades\Gate;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +23,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::define('access-student', function (User $user) {
+            return $user->role === 'student';
+        });
+        
+        Gate::define('access-instructor', function (User $user) {
+            return $user->role === 'instructor';
+        });
+        
+        Gate::define('access-admin', function (User $user) {
+            return $user->role === 'admin';
+        });
         $resetUrl = static function (User $user, string $token): string {
             $query = http_build_query([
                 'token' => $token,

@@ -1,11 +1,12 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import PublicLayout from "./layouts/PublicLayout";
 import Home from "./pages/Home";
+import ErrorPage from "./pages/ErrorPage";
 import ExplorePaths from "./pages/explore/ExplorePaths";
 import { DemoProvider } from "./features/demo/store";
 import Workspace from "./layouts/Workspace";
 import Guard from "./routes/Guard";
-import { Pricing, Checkout, NotFound } from "./features/demo/auth";
+import { Pricing, Checkout } from "./features/demo/auth";
 import ForgotPassword from "./features/auth/pages/ForgotPassword";
 import ResetPassword from "./features/auth/pages/ResetPassword";
 import Register from "./features/auth/pages/Register";
@@ -43,6 +44,8 @@ export default function App() {
             <Route path="forgot-password" element={<ForgotPassword />} />
             <Route path="reset-password" element={<ResetPassword />} />
             <Route path="verify-email" element={<VerifyEmail />} />
+            <Route path="unauthorized" element={<ErrorPage status={401} />} />
+            <Route path="forbidden" element={<ErrorPage status={403} />} />
             <Route
               path="onboarding"
               element={
@@ -51,7 +54,7 @@ export default function App() {
                 </Guard>
               }
             />
-            <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<ErrorPage />} />
           </Route>
           <Route
             path="dashboard"
@@ -77,7 +80,7 @@ export default function App() {
             <Route path="profile" element={<Profile />} />
             <Route path="settings" element={<Profile settings />} />
             <Route path="goals" element={<Onboarding />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<ErrorPage />} />
           </Route>
           <Route
             path="assessment/initial"
@@ -136,7 +139,7 @@ export default function App() {
                 element={<Management role="instructor" />}
               />
             ))}
-            <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<ErrorPage />} />
           </Route>
           <Route
             path="admin"
@@ -158,7 +161,7 @@ export default function App() {
             ].map((p) => (
               <Route key={p} path={p} element={<Management role="admin" />} />
             ))}
-            <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>
       </DemoProvider>
