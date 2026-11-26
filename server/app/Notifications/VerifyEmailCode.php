@@ -24,7 +24,7 @@ class VerifyEmailCode extends Notification
                 'html' => 'emails.verify-email-code',
                 'text' => 'emails.verify-email-code-text',
             ], [
-                'name' => $notifiable->name,
+                'name' => $notifiable->name ?? 'there',
                 'code' => $this->code,
             ]);
     }

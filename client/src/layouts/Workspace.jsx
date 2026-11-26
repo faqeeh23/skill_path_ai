@@ -3,12 +3,14 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router";
 import {
   faArrowRightFromBracket, faBell, faBookOpen, faChartLine, faCompass,
   faHouse, faRoute, faSliders, faUser,
+  faBullseye, faChalkboardUser, faCreditCard, faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../hooks/useAuth";
 import { useTheme } from "../hooks/useTheme";
 import { Icon, ThemeToggle } from "../components/ui/SharedUi";
 import lightLogo from "../assets/skillPathAI_logo_light_mode.png";
 import darkLogo from "../assets/skillPathAI_logo_dark_mode.png";
+import "../features/admin/admin.css";
 
 const navigation = {
   student: [
@@ -32,14 +34,14 @@ const navigation = {
     ["projects", "Project reviews"],
   ],
   admin: [
-    ["", "Overview"],
-    ["users", "Users"],
-    ["instructors", "Instructors"],
-    ["goals", "Career goals"],
-    ["paths", "Learning paths"],
-    ["content", "Platform content"],
-    ["subscriptions", "Subscriptions"],
-    ["analytics", "Analytics"],
+    ["", "Overview", faHouse],
+    ["users", "Users", faUsers],
+    ["instructors", "Instructors", faChalkboardUser],
+    ["goals", "Career goals", faBullseye],
+    ["paths", "Learning paths", faRoute],
+    ["content", "Platform content", faBookOpen],
+    ["subscriptions", "Subscriptions", faCreditCard],
+    ["analytics", "Analytics", faChartLine],
   ],
 };
 
@@ -84,7 +86,7 @@ export default function Workspace({ role = "student" }) {
     faSliders,
   ];
   return (
-    <div className="sp-workspace">
+    <div className={role === "admin" ? "sp-workspace admin-workspace" : "sp-workspace"}>
       <a className="skip-link" href="#workspace-main">
         Skip to content
       </a>
@@ -102,14 +104,14 @@ export default function Workspace({ role = "student" }) {
           {role[0].toUpperCase() + role.slice(1)} workspace
         </p>
         <nav aria-label={`${role} navigation`}>
-          {navigation[role].map(([slug, label], index) => (
+          {navigation[role].map(([slug, label, icon], index) => (
             <Link
               key={slug}
               to={`${base}${slug ? "/" + slug : ""}`}
               aria-current={segment === slug ? "page" : undefined}
               data-section={slug || "overview"}
             >
-              <Icon icon={icons[index % icons.length]} />
+              <Icon icon={icon ?? icons[index % icons.length]} />
               <span>{label}</span>
             </Link>
           ))}

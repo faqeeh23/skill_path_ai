@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\RejectInactiveSession;
+use Illuminate\Contracts\Auth\Middleware\AuthenticatesRequests;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -13,6 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->statefulApi();
+        $middleware->web(append: [RejectInactiveSession::class]);
+        $middleware->api(append: [RejectInactiveSession::class]);
+        $middleware->prependToPriorityList(AuthenticatesRequests::class, RejectInactiveSession::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

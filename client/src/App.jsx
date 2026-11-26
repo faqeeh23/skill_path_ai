@@ -14,17 +14,24 @@ import VerifyEmail from "./features/auth/pages/VerifyEmail";
 import Login from "./features/auth/pages/Login"
 import StudentDashboard from "./features/student/StudentDashboard";
 import Onboarding from "./features/demo/onboarding";
-import {
-  LearningPaths,
-  PathDetail,
-  SkillProfile,
-  Notifications,
-  Profile,
-} from "./features/demo/student";
+import LearningPaths from "./features/student/pages/LearningPaths";
+import PathDetail from "./features/student/pages/PathDetail";
+import SkillProfile from "./features/student/pages/SkillProfile";
+import Notifications from "./features/student/pages/Notifications";
+import Profile from "./features/student/pages/Profile";
+import Settings from "./features/student/pages/Settings";
 import Lesson from "./features/demo/lesson";
 import Assessment from "./features/demo/assessment";
 import Projects from "./features/demo/projects";
 import Management from "./features/demo/management";
+import AdminOverview from "./features/admin/pages/Overview";
+import AdminUsers from "./features/admin/pages/Users";
+import AdminInstructors from "./features/admin/pages/Instructors";
+import AdminCareerGoals from "./features/admin/pages/CareerGoals";
+import AdminLearningPaths from "./features/admin/pages/LearningPaths";
+import AdminPlatformContent from "./features/admin/pages/PlatformContent";
+import AdminSubscriptions from "./features/admin/pages/Subscriptions";
+import AdminAnalytics from "./features/admin/pages/Analytics";
 import "./styles/Landing.css";
 import "./features/demo/styles.css";
 
@@ -43,8 +50,14 @@ export default function App() {
             <Route path="login" element={<Login />} />
             <Route path="forgot-password" element={<ForgotPassword />} />
             <Route path="reset-password" element={<ResetPassword />} />
-            <Route path="verify-email" element={<VerifyEmail />} />
-            <Route path="unauthorized" element={<ErrorPage status={401} />} />
+            <Route
+                path="verify-email"
+                element={
+                    <Guard requireVerified={false}>
+                        <VerifyEmail />
+                    </Guard>
+                }
+            />            <Route path="unauthorized" element={<ErrorPage status={401} />} />
             <Route path="forbidden" element={<ErrorPage status={403} />} />
             <Route
               path="onboarding"
@@ -78,7 +91,7 @@ export default function App() {
             <Route path="projects" element={<Projects />} />
             <Route path="notifications" element={<Notifications />} />
             <Route path="profile" element={<Profile />} />
-            <Route path="settings" element={<Profile settings />} />
+            <Route path="settings" element={<Settings />} />
             <Route path="goals" element={<Onboarding />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>
@@ -149,18 +162,14 @@ export default function App() {
               </Guard>
             }
           >
-            <Route index element={<Management role="admin" />} />
-            {[
-              "users",
-              "instructors",
-              "goals",
-              "paths",
-              "content",
-              "subscriptions",
-              "analytics",
-            ].map((p) => (
-              <Route key={p} path={p} element={<Management role="admin" />} />
-            ))}
+            <Route index element={<AdminOverview />} />
+            <Route path="users" element={<AdminUsers />} />
+            <Route path="instructors" element={<AdminInstructors />} />
+            <Route path="goals" element={<AdminCareerGoals />} />
+            <Route path="paths" element={<AdminLearningPaths />} />
+            <Route path="content" element={<AdminPlatformContent />} />
+            <Route path="subscriptions" element={<AdminSubscriptions />} />
+            <Route path="analytics" element={<AdminAnalytics />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>

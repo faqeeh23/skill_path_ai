@@ -52,6 +52,17 @@ class GoogleSignInTest extends TestCase
         $this->assertGuest();
     }
 
+    public function test_inactive_google_account_cannot_sign_in(): void
+    {
+        config(['app.frontend_url' => 'http://localhost:5173']);
+        $user = User::factory()->create(['google_id' => 'google-subject', 'is_active' => false]);
+        $this->mockGoogleProfile($user->email);
+
+        $this->get('/auth/google/callback?code=test')
+            ->assertRedirect('http://localhost:5173/login?google_error=sign_in_failed');
+        $this->assertGuest();
+    }
+
     private function mockGoogleProfile(string $email): void
     {
         $profile = (new GoogleUser)->setRaw(['email_verified' => true])

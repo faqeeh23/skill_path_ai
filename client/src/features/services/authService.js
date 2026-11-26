@@ -75,3 +75,51 @@ export async function logout() {
     await api.post("/logout");
 }
 
+// Update Profile Information 
+export async function updateProfile(payload) {
+    await getCsrfCookie();
+
+    await api.put("/user/profile-information", payload);
+
+    return {
+        message: "Your profile has been updated successfully."
+    }
+}
+
+// Update Password
+
+export async function updatePassword(payload) {
+    await getCsrfCookie();
+
+    await api.put("/user/password", payload);
+
+    return {
+        message : "Your password has been updated successfully."
+    }
+}
+
+export async function confirmPassword(password) {
+    await getCsrfCookie();
+
+    const response = await api.post("/user/confirm-password", { password });
+    return response.data;
+}
+
+export async function requestEmailChange(email) {
+    const response = await api.post("/api/email/change/request", { email });
+    return response.data;
+}
+
+export async function verifyEmailChange(code) {
+    const response = await api.post("/api/email/change/verify", { code });
+    return response.data;
+}
+
+
+export async function getUsers(params = {}) {
+    const response = await api.get("/api/admin/users", {
+        params,
+    });
+
+    return response.data;
+}

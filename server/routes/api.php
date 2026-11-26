@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\EmailChangeController;
 use App\Http\Controllers\StudentDashboardController;
 use App\Services\EmailVerificationService;
 use Illuminate\Http\Request;
@@ -31,6 +33,15 @@ Route::middleware('auth:sanctum')->group(function () {
 
 });
 
+Route::middleware(['auth:sanctum', 'auth:web', 'verified', 'password.confirm'])
+    ->prefix('email/change')
+    ->group(function () {
+        Route::post('/request', [EmailChangeController::class, 'send'])
+            ->middleware('throttle:5,1,email-change-request');
+        Route::post('/verify', [EmailChangeController::class, 'verify'])
+            ->middleware('throttle:10,1,email-change-verify');
+    });
+
 // Authenticated and verified users
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
@@ -57,7 +68,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->middleware('can:access-admin')
         ->group(function () {
 
-            // Future admin routes
+            Route::apiResource('users', UserController::class)->only(['index', 'show', 'update']);
 
         });
 

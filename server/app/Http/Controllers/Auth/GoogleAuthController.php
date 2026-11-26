@@ -59,6 +59,10 @@ class GoogleAuthController extends Controller
             }
         }
 
+        if (! $user->isActive()) {
+            return redirect()->away($failure);
+        }
+
         if (! $user->hasVerifiedEmail() && $user->email === $email) {
             $user->markEmailAsVerified();
         }

@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
         });
         
         Gate::define('access-admin', function (User $user) {
-            return $user->role === 'admin';
+            return $user->isActive() && $user->role === 'admin';
         });
         $resetUrl = static function (User $user, string $token): string {
             $query = http_build_query([

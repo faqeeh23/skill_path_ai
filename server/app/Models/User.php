@@ -12,13 +12,15 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Services\EmailVerificationService;
 
-use Illuminate\Support\Facades\Route;
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    protected $attributes = ['role' => 'student'];
+    protected $attributes = [
+        'role' => 'student',
+        'is_active' => true,
+    ];
 
     protected $fillable = [
         'name',
@@ -30,19 +32,31 @@ class User extends Authenticatable implements MustVerifyEmail
         'google_id',
     ];
 
-    protected $hidden = ['password_hash', 'remember_token'];
+    protected $hidden = [
+        'password_hash',
+        'remember_token',
+        'two_factor_secret',
+        'two_factor_recovery_codes',
+        'google_id',
+    ];
 
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
             'password_hash' => 'hashed',
+            'is_active' => 'boolean',
         ];
     }
 
     public function getAuthPasswordName(): string
     {
         return 'password_hash';
+    }
+
+    public function isActive(): bool
+    {
+        return $this->is_active;
     }
 
     protected function password(): Attribute
