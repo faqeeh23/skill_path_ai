@@ -13,6 +13,12 @@ class CareerGoal extends Model
         'name',
         'slug',
         'description',
+        'icon_url',
+        'icon_public_id',
+    ];
+
+    protected $hidden = [
+        'icon_public_id',
     ];
 
     public function paths(): HasMany

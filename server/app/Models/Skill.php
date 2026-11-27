@@ -15,6 +15,12 @@ class Skill extends Model
         'parent_id',
         'name',
         'slug',
+        'icon_url',
+        'icon_public_id',
+    ];
+
+    protected $hidden = [
+        'icon_public_id',
     ];
 
     public function parent(): BelongsTo

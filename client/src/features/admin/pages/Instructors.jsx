@@ -1,5 +1,5 @@
-import AdminRecords from "../components/AdminRecords";
+import UserDirectory from "../components/UserDirectory";
 
 export default function Instructors() {
-  return <AdminRecords kind="instructors" />;
+  return <UserDirectory instructorsOnly />;
 }

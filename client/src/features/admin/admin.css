@@ -112,6 +112,34 @@
   min-width: 0;
 }
 
+.admin-workspace .admin-user-filters {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  align-items: end;
+}
+
+.admin-user-pagination {
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.career-goal-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.career-goal-icon,
+.career-goal-name > svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.career-goal-name > svg {
+  color: var(--accent);
+}
+
 .admin-record-count,
 .admin-panel-copy,
 .admin-empty p {
