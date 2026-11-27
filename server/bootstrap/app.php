@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\RejectInactiveSession;
 use Illuminate\Contracts\Auth\Middleware\AuthenticatesRequests;
 use Illuminate\Foundation\Application;
@@ -15,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->statefulApi();
+        $middleware->alias(['guest' => RedirectIfAuthenticated::class]);
         $middleware->web(append: [RejectInactiveSession::class]);
         $middleware->api(append: [RejectInactiveSession::class]);
         $middleware->prependToPriorityList(AuthenticatesRequests::class, RejectInactiveSession::class);

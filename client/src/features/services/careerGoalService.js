@@ -7,11 +7,23 @@ export async function listCareerGoals(signal) {
 }
 
 export async function createCareerGoal(data) {
+    return saveCareerGoal("/api/admin/career-goals", data);
+}
 
+export async function updateCareerGoal(id, data) {
+    return saveCareerGoal(`/api/admin/career-goals/${id}`, data, "PUT");
+}
+
+async function saveCareerGoal(url, data, method) {
     const formData = new FormData();
+
+    if (method) {
+        formData.append("_method", method);
+    }
 
     formData.append("name", data.name);
     formData.append("description", data.description ?? "");
+    formData.append("icon_mode", data.icon ? "upload" : "keep");
 
     if (data.icon) {
         formData.append("icon", data.icon);
@@ -19,7 +31,7 @@ export async function createCareerGoal(data) {
 
     await getCsrfCookie();
     const response = await api.post(
-        "/api/admin/career-goals",
+        url,
         formData,
         {
             headers: {

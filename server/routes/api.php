@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CareerGoalController;
+use App\Http\Controllers\Admin\IconController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\EmailChangeController;
 use App\Http\Controllers\StudentDashboardController;
@@ -71,6 +72,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::apiResource('users', UserController::class)->only(['index', 'show', 'update']);
 
             Route::apiResource('career-goals', CareerGoalController::class)->only(['index', 'store']);
+            Route::put('/career-goals/{careerGoal}', [CareerGoalController::class, 'update']);
+            Route::get('/icons', [IconController::class, 'index']);
         });
 
     // Temporary verification test

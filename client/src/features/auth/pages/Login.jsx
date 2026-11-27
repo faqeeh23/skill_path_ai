@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router";import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link, Navigate } from "react-router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faRightToBracket,
     faRoute,
@@ -16,9 +17,11 @@ import lightLogo from "../../../assets/skillPathAI_logo_light_mode.png";
 import "../auth.css";
 import GoogleLoginButton from "../components/GoogleLoginButton";
 import { useAuth } from "../../../hooks/useAuth";
+
+const dashboardByRole = { admin: "/admin", instructor: "/instructor", student: "/dashboard" };
+
 export default function Login() {
-    const { login } = useAuth()
-    const navigate = useNavigate();
+    const { login, user, loading, refreshUser } = useAuth();
 
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -51,7 +54,7 @@ export default function Login() {
     async function handleSubmit(event) {
         event.preventDefault();
 
-        if (isSubmitting) return;
+        if (isSubmitting || loading || user) return;
 
         setNotice("");
 
@@ -85,29 +88,6 @@ export default function Login() {
                 });
                 return;
             }
-            if (!user.email_verified_at) {
-                navigate("/verify-email", { replace: true });
-                return;
-            }
-
-            switch (user.role) {
-
-                case "admin":
-                    navigate("/admin", { replace: true });
-                    break;
-
-                case "instructor":
-                    navigate("/instructor", { replace: true });
-                    break;
-
-                case "student":
-                    navigate("/dashboard", { replace: true });
-                    break;
-
-                default:
-                    navigate("/", { replace: true });
-            }
-
         } catch (error) {
 
             const status = error.response?.status;
@@ -123,6 +103,11 @@ export default function Login() {
 
                 setErrors(serverErrors);
 
+            } else if (status === 409) {
+                const currentUser = await refreshUser().catch(() => null);
+                if (!currentUser) {
+                    setErrors({ general: "Unable to restore your session. Reload the page and try again." });
+                }
             } else if (status === 419) {
 
                 setErrors({
@@ -151,6 +136,11 @@ export default function Login() {
         } finally {
             setIsSubmitting(false);
         }
+    }
+
+    if (user) {
+        const destination = user.email_verified_at ? dashboardByRole[user.role] ?? "/" : "/verify-email";
+        return <Navigate to={destination} replace />;
     }
 
     return (
@@ -255,7 +245,7 @@ export default function Login() {
                         <button
                             type="submit"
                             className="auth-submit"
-                            disabled={isSubmitting}
+                            disabled={isSubmitting || loading}
                             aria-busy={isSubmitting}
                         >
                             <span>

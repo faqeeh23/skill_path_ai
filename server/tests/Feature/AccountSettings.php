@@ -16,6 +16,21 @@ class AccountSettings extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_login_with_an_existing_session_returns_json_without_redirecting(): void
+    {
+        $user = User::factory()->create();
+        $other = User::factory()->create(['password' => 'CurrentPassword123!']);
+
+        $response = $this->actingAs($user)->postJson('/login', [
+            'email' => $other->email,
+            'password' => 'CurrentPassword123!',
+        ]);
+
+        $response->assertConflict()->assertJsonPath('message', 'You are already signed in.');
+        $this->assertNull($response->headers->get('Location'));
+        $this->assertAuthenticatedAs($user);
+    }
+
     public function test_admin_can_filter_users_and_update_another_account(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { faBullseye, faCode, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faBullseye, faCode, faPenToSquare, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Header, Icon } from "../../../components/ui/SharedUi";
-import { createCareerGoal, listCareerGoals } from "../../services/careerGoalService";
+import { createCareerGoal, listCareerGoals, updateCareerGoal } from "../../services/careerGoalService";
 
 export default function CareerGoals() {
   const [goals, setGoals] = useState(null);
   const [loadError, setLoadError] = useState("");
   const [attempt, setAttempt] = useState(0);
-  const [adding, setAdding] = useState(false);
+  const [draft, setDraft] = useState(null);
   const [icon, setIcon] = useState(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
@@ -34,7 +34,7 @@ export default function CareerGoals() {
   }
 
   function closeForm() {
-    setAdding(false);
+    setDraft(null);
     setIcon(null);
     setError("");
   }
@@ -54,14 +54,18 @@ export default function CareerGoals() {
 
     setSaving(true);
     try {
-      const goal = await createCareerGoal({ name, description: fields.get("description").trim(), icon });
-      setGoals((previous) => [...previous, goal].sort((a, b) => a.name.localeCompare(b.name)));
+      const data = { name, description: fields.get("description").trim(), icon };
+      const goal = draft.id ? await updateCareerGoal(draft.id, data) : await createCareerGoal(data);
+      setGoals((previous) => [...previous.filter((item) => item.id !== goal.id), goal]
+        .sort((a, b) => a.name.localeCompare(b.name)));
       setSearch("");
       closeForm();
-      setNotice("Career goal added.");
+      setNotice(draft.id ? "Career goal updated." : "Career goal added.");
     } catch (failure) {
       const data = failure.response?.data;
-      setError(Object.values(data?.errors ?? {})[0]?.[0] ?? data?.message ?? "Unable to add the career goal.");
+      setError(Object.values(data?.errors ?? {})[0]?.[0]
+        ?? (failure.response?.status < 500 ? data?.message : null)
+        ?? "Unable to save the career goal. Try again.");
     } finally {
       setSaving(false);
     }
@@ -73,20 +77,23 @@ export default function CareerGoals() {
   return (
     <>
       <Header title={<><Icon icon={faBullseye} /> Career goals</>} action={
-        <button className="btn btn-primary" type="button" onClick={() => setAdding(true)} disabled={!goals || adding}>
+        <button className="btn btn-primary" type="button" onClick={() => setDraft({})} disabled={!goals || Boolean(draft)}>
           <Icon icon={faPlus} /> Add career goal
         </button>
       }>
         Organize the career outcomes available to learners.
       </Header>
       {notice && <p className="sp-notice" role="status">{notice}</p>}
-      {adding && (
-        <form className="sp-panel sp-form" onSubmit={handleSubmit} aria-labelledby="add-career-goal">
-          <h2 id="add-career-goal">Add career goal</h2>
-          <label>Name <input name="name" maxLength={100} required disabled={saving} /></label>
-          <label>Description <textarea name="description" disabled={saving} /></label>
+      {draft && (
+        <form className="sp-panel sp-form" onSubmit={handleSubmit} aria-labelledby="career-goal-form-title">
+          <h2 id="career-goal-form-title">{draft.id ? "Edit career goal" : "Add career goal"}</h2>
+          <label>Name <input name="name" defaultValue={draft.name ?? ""} maxLength={100} required disabled={saving} /></label>
+          <label>Description <textarea name="description" defaultValue={draft.description ?? ""} disabled={saving} /></label>
+          {draft.icon_url && (
+            <p className="career-goal-name"><img className="career-goal-icon" src={draft.icon_url} alt="" /> Current icon</p>
+          )}
           <label>
-            Career goal icon <span>(optional)</span>
+            {draft.icon_url ? "Replace icon (optional)" : "Career goal icon (optional)"}
             <input name="icon" type="file" accept="image/png,image/jpeg,image/webp"
               onChange={(event) => setIcon(event.target.files?.[0] ?? null)} disabled={saving}
               aria-describedby="career-goal-icon-help" />
@@ -113,7 +120,7 @@ export default function CareerGoals() {
             <div className="sp-panel sp-table-scroll">
               <table>
                 <caption>Career goals · {visibleGoals.length} of {goals.length}</caption>
-                <thead><tr><th scope="col">Name</th><th scope="col">Description</th></tr></thead>
+                <thead><tr><th scope="col">Name</th><th scope="col">Description</th><th scope="col">Actions</th></tr></thead>
                 <tbody>
                   {visibleGoals.map((goal) => (
                     <tr key={goal.id}>
@@ -124,6 +131,12 @@ export default function CareerGoals() {
                         </span>
                       </th>
                       <td>{goal.description || "—"}</td>
+                      <td>
+                        <button type="button" disabled={Boolean(draft)} aria-label={`Edit ${goal.name}`}
+                          onClick={() => { setNotice(""); setDraft(goal); }}>
+                          <Icon icon={faPenToSquare} /> Edit
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
